@@ -1,0 +1,244 @@
+// Prisma Schema for Doc.DOOM - Intelligent Information Understanding & Processing
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  name              String?
+  avatarUrl         String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  profile           Profile?
+  documents         Document[]
+  chatSessions      ChatSession[]
+  userSettings      UserSettings?
+  highlightSettings HighlightSettings?
+
+  @@index([email])
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school        String?
+  college       String?
+  degree        String?
+  currentStatus String?
+  company       String?
+  role          String?
+  location      String?
+  bio           String?
+  dob           String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Document {
+  id                   String               @id @default(uuid())
+  userId               String
+  user                 User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title                String
+  originalName         String
+  mimeType             String
+  fileSizeBytes        Int
+  storagePath          String
+  fileHash             String?
+  status               String               @default("UPLOADING") // UPLOADING, PROCESSING, ANALYSING, COMPLETED, FAILED
+  errorMessage         String?
+  rawText              String?
+  pageCount            Int?                 @default(1)
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  versions             DocumentVersion[]
+  analysis             DocumentAnalysis?
+  entities             ExtractedEntity[]
+  insights             Insight[]
+  missingInformation  MissingInformation[]
+  visualizations       Visualization[]
+  chatSessions         ChatSession[]
+
+  // Conflicts where this document is involved
+  primaryConflicts     Conflict[]           @relation("PrimaryDocument")
+  conflictingConflicts Conflict[]           @relation("ConflictingDocument")
+
+  @@index([userId])
+  @@index([status])
+}
+
+model DocumentVersion {
+  id            String   @id @default(uuid())
+  documentId    String
+  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  versionNumber Int      @default(1)
+  storagePath   String
+  changeSummary String?
+  createdAt     DateTime @default(now())
+
+  @@index([documentId])
+}
+
+model DocumentAnalysis {
+  id                   String   @id @default(uuid())
+  documentId           String   @unique
+  document             Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  category             String   @default("General")
+  shortSummary         String
+  detailedSummary      String
+  mainPurpose          String
+  keyTopics            String   // JSON string array of topics
+  confidenceScore      Float    @default(0.95)
+  language             String   @default("en")
+  wordCount            Int      @default(0)
+  processingDurationMs Int      @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model ExtractedEntity {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  category    String   // Person, Organization, Location, Date, MonetaryValue, Product, Project, Department, Deadline
+  name        String
+  context     String?
+  sourceRef   String?  // e.g., "Page 1 - Header", "Page 2 - Section 3"
+  createdAt   DateTime @default(now())
+
+  @@index([documentId])
+  @@index([category])
+}
+
+model Insight {
+  id                String   @id @default(uuid())
+  documentId        String
+  document          Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  title             String
+  description       String
+  priority          String   // CRITICAL, IMPORTANT, NEEDS_REVIEW, INFORMATIONAL
+  category          String   // Requirement, Deadline, Decision, Fact, Financial, Rule, Responsibility
+  sourceRef         String?  // Source reference e.g., "Invoice.pdf - Page 2"
+  isActionable      Boolean  @default(false)
+  recommendedAction String?
+  createdAt         DateTime @default(now())
+
+  @@index([documentId])
+  @@index([priority])
+}
+
+model MissingInformation {
+  id         String   @id @default(uuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  itemName   String
+  category   String
+  status     String   // EXPLICITLY_MISSING, NOT_FOUND, POSSIBLY_MISSING, NOT_APPLICABLE
+  reason     String
+  evidence   String?
+  severity   String   @default("MEDIUM") // LOW, MEDIUM, HIGH, CRITICAL
+  createdAt  DateTime @default(now())
+
+  @@index([documentId])
+  @@index([status])
+}
+
+model Conflict {
+  id                     String    @id @default(uuid())
+  primaryDocId           String
+  primaryDocument        Document  @relation("PrimaryDocument", fields: [primaryDocId], references: [id], onDelete: Cascade)
+  conflictingDocId       String
+  conflictingDocument    Document  @relation("ConflictingDocument", fields: [conflictingDocId], references: [id], onDelete: Cascade)
+  fieldName              String
+  primaryValue           String
+  conflictingValue       String
+  description            String
+  status                 String    @default("NEEDS_HUMAN_REVIEW") // NEEDS_HUMAN_REVIEW, RESOLVED, DISMISSED
+  primarySourceRef       String?
+  conflictingSourceRef   String?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  @@index([primaryDocId])
+  @@index([conflictingDocId])
+}
+
+model Visualization {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  chartType   String   // bar, line, pie, donut, area, histogram, kpi, comparison
+  title       String
+  description String?
+  xAxisKey    String?
+  yAxisKey    String?
+  dataConfig  String   // JSON string of chart points and series
+  isSupported Boolean  @default(true)
+  priority    Int      @default(1)
+  createdAt   DateTime @default(now())
+
+  @@index([documentId])
+}
+
+model ChatSession {
+  id         String        @id @default(uuid())
+  userId     String
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documentId String?
+  document   Document?     @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  title      String        @default("New Chat")
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  messages   ChatMessage[]
+
+  @@index([userId])
+  @@index([documentId])
+}
+
+model ChatMessage {
+  id        String      @id @default(uuid())
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role      String      // user, assistant, system
+  content   String
+  sources   String?     // JSON array of source citations [{ docTitle, sourceRef, snippet }]
+  createdAt DateTime    @default(now())
+
+  @@index([sessionId])
+}
+
+model UserSettings {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  theme              String   @default("system")
+  emailNotifications Boolean  @default(true)
+  autoAnalyze        Boolean  @default(true)
+  defaultModel       String   @default("gemini-2.5-flash")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model HighlightSettings {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  criticalColor  String   @default("#ef4444") // Red
+  importantColor String   @default("#f97316") // Orange
+  warningColor   String   @default("#eab308") // Yellow/Amber
+  missingColor   String   @default("#a855f7") // Purple
+  conflictColor  String   @default("#ec4899") // Pink
+  deadlineColor  String   @default("#3b82f6") // Blue
+  infoColor      String   @default("#10b981") // Green
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

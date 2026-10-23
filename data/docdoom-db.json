@@ -1,0 +1,743 @@
+{
+  "users": [
+    {
+      "id": "user-default-1",
+      "email": "demo@docdoom.enterprise",
+      "name": "Chief Information Officer",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-10-22T15:37:35.394Z",
+      "updatedAt": "2026-10-22T15:37:35.394Z"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "profile-default-1",
+      "userId": "user-default-1",
+      "school": "National Public School",
+      "college": "Indian Institute of Technology",
+      "degree": "Master of Technology in Artificial Intelligence",
+      "currentStatus": "student",
+      "company": "Autonomous Intelligence Labs",
+      "role": "Chief AI Architect",
+      "location": "Bengaluru / San Francisco",
+      "bio": "Leading information intelligence and multi-document reasoning at HackNext.",
+      "dob": "1996-08-24",
+      "createdAt": "2026-10-22T15:37:35.394Z",
+      "updatedAt": "2026-10-23T14:49:12.944Z"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-seed-1",
+      "userId": "user-default-1",
+      "docNumber": 1,
+      "title": "Sales_Performance_Q4",
+      "originalName": "Sales_Performance_Q4.csv",
+      "mimeType": "text/csv",
+      "fileSizeBytes": 24500,
+      "storagePath": "/uploads/Sales_Performance_Q4.csv",
+      "status": "COMPLETED",
+      "rawText": "Enterprise Sales Report: Q4 Fiscal Performance\nRegion, Product, Q3_Revenue, Q4_Revenue, Units_Sold, Margin_Percentage\nNorth America, Enterprise Cloud Suite, 450000, 620000, 140, 42\nEurope, Enterprise Cloud Suite, 380000, 490000, 115, 38\nAsia Pacific, AI Intelligence Add-on, 210000, 390000, 240, 55\nLatin America, AI Intelligence Add-on, 95000, 140000, 85, 48\nNorth America, Security Sentinel, 310000, 420000, 95, 51\nEurope, Security Sentinel, 280000, 360000, 80, 49\nSummary Total: Q4 Total Revenue = $2,420,000 across 755 enterprise licenses.",
+      "pageCount": 1,
+      "createdAt": "2026-10-22T11:37:35.392Z",
+      "updatedAt": "2026-10-22T11:37:35.393Z",
+      "analysis": {
+        "id": "analysis-doc-seed-1",
+        "documentId": "doc-seed-1",
+        "category": "Performance Report",
+        "shortSummary": "Q4 regional sales report recording $2,420,000 in total revenue led by North America and Cloud Suite products.",
+        "detailedSummary": "The Q4 sales ledger reveals significant momentum across enterprise subscriptions. Revenue expanded by 34% quarter-over-quarter, driven by high-margin AI Intelligence Add-ons (55% gross margin in APAC) and robust enterprise software renewals in North America.",
+        "mainPurpose": "Evaluate quarterly product revenue, regional distribution, and gross margin efficiency for executive board review.",
+        "keyTopics": [
+          "Q4 Revenue Growth",
+          "Regional Sales Velocity",
+          "Product Gross Margins",
+          "Enterprise Software Licenses"
+        ],
+        "confidenceScore": 0.98,
+        "language": "en",
+        "wordCount": 125,
+        "processingDurationMs": 640,
+        "createdAt": "2026-10-22T15:37:35.393Z",
+        "updatedAt": "2026-10-22T15:37:35.393Z"
+      },
+      "entities": [
+        {
+          "id": "e1-1",
+          "documentId": "doc-seed-1",
+          "category": "MonetaryValue",
+          "name": "$2,420,000",
+          "context": "Total Q4 Enterprise Revenue",
+          "sourceRef": "Sales_Performance_Q4.csv - Summary Line",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e1-2",
+          "documentId": "doc-seed-1",
+          "category": "Location",
+          "name": "North America",
+          "context": "Top performing sales territory",
+          "sourceRef": "Sales_Performance_Q4.csv - Row 1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e1-3",
+          "documentId": "doc-seed-1",
+          "category": "Product",
+          "name": "Enterprise Cloud Suite",
+          "context": "Leading revenue contributing software package",
+          "sourceRef": "Sales_Performance_Q4.csv - Row 1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e1-4",
+          "documentId": "doc-seed-1",
+          "category": "Product",
+          "name": "AI Intelligence Add-on",
+          "context": "Highest margin tier (55% APAC)",
+          "sourceRef": "Sales_Performance_Q4.csv - Row 3",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e1-5",
+          "documentId": "doc-seed-1",
+          "category": "MonetaryValue",
+          "name": "$620,000",
+          "context": "Peak single-region product revenue (NA Cloud Suite)",
+          "sourceRef": "Sales_Performance_Q4.csv - Row 1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "insights": [
+        {
+          "id": "ins1-1",
+          "documentId": "doc-seed-1",
+          "title": "Strong Revenue Expansion: $2.42M",
+          "description": "Quarterly growth surpassed baseline projections by 18%, powered by AI Add-on expansion.",
+          "priority": "INFORMATIONAL",
+          "category": "Financial",
+          "sourceRef": "Sales_Performance_Q4.csv - Row 7",
+          "isActionable": true,
+          "recommendedAction": "Reallocate 15% of APAC sales headcount to expand AI Add-on outbound campaigns. (AI Suggestion)",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "missingInformation": [
+        {
+          "id": "m1-1",
+          "documentId": "doc-seed-1",
+          "itemName": "Direct Customer Acquisition Cost (CAC)",
+          "category": "Financial Analytics",
+          "status": "NOT_FOUND",
+          "reason": "Sales ledger lists gross revenue and margins without marketing or sales rep commission deductions.",
+          "evidence": "Column set restricted to Revenue, Units Sold, and Margin Percentage.",
+          "severity": "MEDIUM",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "visualizations": [
+        {
+          "id": "vis1-bar",
+          "documentId": "doc-seed-1",
+          "chartType": "bar",
+          "title": "Q4 Revenue by Region & Product Tier",
+          "description": "Comparative revenue contributions across core operating markets.",
+          "xAxisKey": "name",
+          "yAxisKey": "revenue",
+          "data": [
+            {
+              "name": "NA Cloud",
+              "revenue": 620000,
+              "value": 620000
+            },
+            {
+              "name": "EU Cloud",
+              "revenue": 490000,
+              "value": 490000
+            },
+            {
+              "name": "NA Security",
+              "revenue": 420000,
+              "value": 420000
+            },
+            {
+              "name": "APAC AI",
+              "revenue": 390000,
+              "value": 390000
+            },
+            {
+              "name": "EU Security",
+              "revenue": 360000,
+              "value": 360000
+            },
+            {
+              "name": "LATAM AI",
+              "revenue": 140000,
+              "value": 140000
+            }
+          ],
+          "isSupported": true,
+          "priority": 1,
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "vis1-line",
+          "documentId": "doc-seed-1",
+          "chartType": "line",
+          "title": "Quarter-over-Quarter Growth Trajectory (Q3 vs Q4)",
+          "description": "Tracking trajectory from Q3 baseline to Q4 performance.",
+          "xAxisKey": "name",
+          "yAxisKey": "Q4",
+          "data": [
+            {
+              "name": "NA Cloud",
+              "Q3": 450000,
+              "Q4": 620000,
+              "value": 620000
+            },
+            {
+              "name": "EU Cloud",
+              "Q3": 380000,
+              "Q4": 490000,
+              "value": 490000
+            },
+            {
+              "name": "APAC AI",
+              "Q3": 210000,
+              "Q4": 390000,
+              "value": 390000
+            },
+            {
+              "name": "LATAM AI",
+              "Q3": 95000,
+              "Q4": 140000,
+              "value": 140000
+            },
+            {
+              "name": "NA Security",
+              "Q3": 310000,
+              "Q4": 420000,
+              "value": 420000
+            },
+            {
+              "name": "EU Security",
+              "Q3": 280000,
+              "Q4": 360000,
+              "value": 360000
+            }
+          ],
+          "isSupported": true,
+          "priority": 2,
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "vis1-donut",
+          "documentId": "doc-seed-1",
+          "chartType": "donut",
+          "title": "Regional Revenue Share Proportions",
+          "description": "Percentage distribution of gross Q4 revenues.",
+          "xAxisKey": "name",
+          "yAxisKey": "value",
+          "data": [
+            {
+              "name": "North America",
+              "value": 1040000
+            },
+            {
+              "name": "Europe",
+              "value": 850000
+            },
+            {
+              "name": "Asia Pacific",
+              "value": 390000
+            },
+            {
+              "name": "Latin America",
+              "value": 140000
+            }
+          ],
+          "isSupported": true,
+          "priority": 3,
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "vis1-kpi",
+          "documentId": "doc-seed-1",
+          "chartType": "kpi",
+          "title": "Q4 Commercial Executive KPIs",
+          "description": "Summary financial benchmarks",
+          "data": [
+            {
+              "name": "Total Revenue",
+              "value": "$2,420,000"
+            },
+            {
+              "name": "Total Units Sold",
+              "value": "755"
+            },
+            {
+              "name": "Average Deal Size",
+              "value": "$3,205"
+            },
+            {
+              "name": "Peak Margin Tier",
+              "value": "55% (APAC)"
+            }
+          ],
+          "isSupported": true,
+          "priority": 4,
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ]
+    },
+    {
+      "id": "doc-seed-2",
+      "userId": "user-default-1",
+      "docNumber": 2,
+      "title": "Vendor_Service_Agreement_Acme",
+      "originalName": "Vendor_Service_Agreement_Acme.pdf",
+      "mimeType": "application/pdf",
+      "fileSizeBytes": 185000,
+      "storagePath": "/uploads/Vendor_Service_Agreement_Acme.pdf",
+      "status": "COMPLETED",
+      "rawText": "MASTER SERVICES AGREEMENT\nParties: Doc.DOOM Enterprise Inc. (\"Client\") and Acme Logistics Corp (\"Vendor\")\nEffective Date: September 01, 2026\nTerm: 12 months with mutual renewal option.\n\nSection 4.1: Financial Remuneration and Billing Terms\nTotal Contract Amount: $45,000 USD payable in quarterly tranches.\nPayment Deadline: October 12, 2026.\nPayment Method: Wire transfer to Vendor designated escrow account.\n\nSection 6.2: Service Level Agreement (SLA)\nVendor guarantees 99.9% uptime for cloud synchronization services. Late response penalty: 2% credit per 30 minutes downtime.\n\nSection 8.0: Signatures and Attachments\nAuthorized Signer (Client): Dr. Sarah Jenkins, VP Operations\nAuthorized Signer (Vendor): Marcus Vance, Commercial Director\nNote: Technical Scope of Work detailed in Exhibit Annex B.",
+      "pageCount": 3,
+      "createdAt": "2026-10-22T12:37:35.393Z",
+      "updatedAt": "2026-10-22T12:37:35.393Z",
+      "analysis": {
+        "id": "analysis-doc-seed-2",
+        "documentId": "doc-seed-2",
+        "category": "Legal Agreement",
+        "shortSummary": "Master services agreement contracting Acme Logistics for cloud infrastructure support at $45,000 with payment due October 12.",
+        "detailedSummary": "A 12-month master services contract between Doc.DOOM Enterprise Inc. and Acme Logistics Corp. Sets payment obligation of $45,000 USD with a strict payment deadline of October 12, 2026. Mandates a 99.9% uptime SLA with financial service credit penalties.",
+        "mainPurpose": "Establish legally binding terms of service, payment schedules, and performance standards with Acme Logistics.",
+        "keyTopics": [
+          "Master Service Agreement",
+          "October 12 Payment Deadline",
+          "$45,000 Fee",
+          "SLA Penalties"
+        ],
+        "confidenceScore": 0.97,
+        "language": "en",
+        "wordCount": 140,
+        "processingDurationMs": 820,
+        "createdAt": "2026-10-22T15:37:35.393Z",
+        "updatedAt": "2026-10-22T15:37:35.393Z"
+      },
+      "entities": [
+        {
+          "id": "e2-1",
+          "documentId": "doc-seed-2",
+          "category": "Organization",
+          "name": "Acme Logistics Corp",
+          "context": "Designated vendor providing infrastructure services",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Page 1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e2-2",
+          "documentId": "doc-seed-2",
+          "category": "MonetaryValue",
+          "name": "$45,000 USD",
+          "context": "Fixed annual contractual fee",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e2-3",
+          "documentId": "doc-seed-2",
+          "category": "Deadline",
+          "name": "October 12, 2026",
+          "context": "Mandatory invoice payment deadline",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e2-4",
+          "documentId": "doc-seed-2",
+          "category": "Person",
+          "name": "Dr. Sarah Jenkins",
+          "context": "Client VP Operations authorized signatory",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 8.0",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e2-5",
+          "documentId": "doc-seed-2",
+          "category": "Person",
+          "name": "Marcus Vance",
+          "context": "Vendor Commercial Director",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 8.0",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "insights": [
+        {
+          "id": "ins2-1",
+          "documentId": "doc-seed-2",
+          "title": "Payment Deadline: October 12, 2026",
+          "description": "First quarterly disbursement under Acme Logistics contract must be executed by October 12, 2026.",
+          "priority": "CRITICAL",
+          "category": "Deadline",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+          "isActionable": true,
+          "recommendedAction": "Verify invoice matching against purchase order before disbursement on October 12. (AI Suggestion)",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "ins2-2",
+          "documentId": "doc-seed-2",
+          "title": "Contractual Obligation: $45,000 USD",
+          "description": "Total fee committed across 12-month period with quarterly installments.",
+          "priority": "IMPORTANT",
+          "category": "Financial",
+          "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+          "isActionable": true,
+          "recommendedAction": "Log in accounts payable ledger for Q4 treasury forecasting. (AI Suggestion)",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "missingInformation": [
+        {
+          "id": "m2-1",
+          "documentId": "doc-seed-2",
+          "itemName": "Exhibit Annex B (Technical Scope of Work)",
+          "category": "Supporting Document",
+          "status": "EXPLICITLY_MISSING",
+          "reason": "Section 8.0 references Exhibit Annex B for technical deliverables, but the attachment is missing from the submitted agreement.",
+          "evidence": "Clause 8.0 states: \"Technical Scope of Work detailed in Exhibit Annex B\", yet document concludes without annexed schedule.",
+          "severity": "HIGH",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "m2-2",
+          "documentId": "doc-seed-2",
+          "itemName": "Governing Law and Dispute Jurisdiction",
+          "category": "Legal / Compliance",
+          "status": "NOT_FOUND",
+          "reason": "The agreement lacks a designated state or federal court jurisdiction clause for legal dispute arbitration.",
+          "evidence": "Zero mentions of state venue (e.g. Delaware, California, New York) or arbitration body.",
+          "severity": "MEDIUM",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "visualizations": []
+    },
+    {
+      "id": "doc-seed-3",
+      "userId": "user-default-1",
+      "docNumber": 3,
+      "title": "Procurement_Purchase_Order_PO8821",
+      "originalName": "Procurement_Purchase_Order_PO8821.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "fileSizeBytes": 42000,
+      "storagePath": "/uploads/Procurement_Purchase_Order_PO8821.docx",
+      "status": "COMPLETED",
+      "rawText": "ENTERPRISE PURCHASE ORDER\nPO Number: PO-8821\nVendor: Acme Logistics Corp\nAssociated Reference: Master Agreement Services 2026\n\nOrder Line Items:\n1. Enterprise Cloud Infrastructure Provisioning: $40,000\n2. Accelerated Support & SLA Premium: $12,000\nTotal Purchase Order Amount: $52,000 USD\n\nPayment Schedule:\nPayment Deadline: October 15, 2026 (Extended Net-45 Terms)\nPayment Status: Pending Finance Director Approval\nDeliverable Check: Mandatory QA sign-off prior to electronic transfer.",
+      "pageCount": 1,
+      "createdAt": "2026-10-22T13:37:35.393Z",
+      "updatedAt": "2026-10-22T13:37:35.393Z",
+      "analysis": {
+        "id": "analysis-doc-seed-3",
+        "documentId": "doc-seed-3",
+        "category": "Procurement Order",
+        "shortSummary": "Purchase Order PO-8821 for Acme Logistics totaling $52,000 with payment scheduled for October 15.",
+        "detailedSummary": "Official procurement record authorizing $52,000 in expenditures with Acme Logistics Corp ($40,000 base infrastructure + $12,000 SLA premium). Sets payment deadline for October 15, 2026 citing Net-45 terms.",
+        "mainPurpose": "Authorize purchase order disbursement and define payment release terms for Acme Logistics services.",
+        "keyTopics": [
+          "Purchase Order PO-8821",
+          "October 15 Deadline",
+          "$52,000 Total Allocation",
+          "Net-45 Terms"
+        ],
+        "confidenceScore": 0.96,
+        "language": "en",
+        "wordCount": 78,
+        "processingDurationMs": 510,
+        "createdAt": "2026-10-22T15:37:35.393Z",
+        "updatedAt": "2026-10-22T15:37:35.393Z"
+      },
+      "entities": [
+        {
+          "id": "e3-1",
+          "documentId": "doc-seed-3",
+          "category": "Organization",
+          "name": "Acme Logistics Corp",
+          "context": "Procurement beneficiary",
+          "sourceRef": "Procurement_Purchase_Order_PO8821.docx - Header",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e3-2",
+          "documentId": "doc-seed-3",
+          "category": "Deadline",
+          "name": "October 15, 2026",
+          "context": "Designated purchase order payment deadline",
+          "sourceRef": "Procurement_Purchase_Order_PO8821.docx - Payment Terms",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e3-3",
+          "documentId": "doc-seed-3",
+          "category": "MonetaryValue",
+          "name": "$52,000 USD",
+          "context": "Total PO value including SLA add-on",
+          "sourceRef": "Procurement_Purchase_Order_PO8821.docx - Line Items",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "insights": [
+        {
+          "id": "ins3-1",
+          "documentId": "doc-seed-3",
+          "title": "Payment Scheduled: October 15, 2026",
+          "description": "PO indicates payment release date of October 15, 2026 under Net-45 extended terms.",
+          "priority": "IMPORTANT",
+          "category": "Deadline",
+          "sourceRef": "Procurement_Purchase_Order_PO8821.docx - Terms",
+          "isActionable": true,
+          "recommendedAction": "Reconcile against Vendor Agreement which stated October 12. (AI Suggestion)",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "missingInformation": [],
+      "visualizations": []
+    },
+    {
+      "id": "doc-seed-4",
+      "userId": "user-default-1",
+      "docNumber": 4,
+      "title": "Enterprise_Security_Compliance_Policy",
+      "originalName": "Enterprise_Security_Compliance_Policy.txt",
+      "mimeType": "text/plain",
+      "fileSizeBytes": 12000,
+      "storagePath": "/uploads/Enterprise_Security_Compliance_Policy.txt",
+      "status": "COMPLETED",
+      "rawText": "ENTERPRISE SECURITY & INFORMATION GOVERNANCE POLICY\nDocument Code: SEC-POL-2026-v2\nClassification: Internal Enterprise Only\n\n1. Purpose & Scope\nThis policy mandates stringent access control, role-based encryption, and confidential data storage protocols for all enterprise documents handled by Doc.DOOM systems.\n\n2. Access Control Principles\n- Principle of Least Privilege: Every user account is isolated via PostgreSQL Row Level Security (RLS).\n- Document data belonging to User A must never be accessible, queryable, or retrievable by User B.\n- Dual-key authorization is mandatory for cross-repository audit workflows.\n\n3. Retention and Sanitization\n- All deleted documents must have their physical storage files unlinked and purged immediately.\n- Database records including entities, analysis, and vector indices must be permanently removed upon deletion.\n- Audit logs are retained for compliance verification.",
+      "pageCount": 2,
+      "createdAt": "2026-10-22T14:37:35.393Z",
+      "updatedAt": "2026-10-22T14:37:35.393Z",
+      "analysis": {
+        "id": "analysis-doc-seed-4",
+        "documentId": "doc-seed-4",
+        "category": "Enterprise Policy",
+        "shortSummary": "Internal enterprise security policy mandating strict user data isolation, RLS enforcement, and permanent document deletion rules.",
+        "detailedSummary": "Outlines governance principles for institutional data handling. Enforces tenant isolation where documents belonging to one user can never be queried by another. Details physical storage unlinking and atomic database record purging.",
+        "mainPurpose": "Establish mandatory security, privacy, and data isolation protocols across all enterprise applications.",
+        "keyTopics": [
+          "User Data Isolation",
+          "Row Level Security",
+          "Document Purging Standards",
+          "Least Privilege"
+        ],
+        "confidenceScore": 0.99,
+        "language": "en",
+        "wordCount": 165,
+        "processingDurationMs": 480,
+        "createdAt": "2026-10-22T15:37:35.393Z",
+        "updatedAt": "2026-10-22T15:37:35.393Z"
+      },
+      "entities": [
+        {
+          "id": "e4-1",
+          "documentId": "doc-seed-4",
+          "category": "Requirement",
+          "name": "Row Level Security (RLS)",
+          "context": "Mandatory data isolation protocol",
+          "sourceRef": "Enterprise_Security_Compliance_Policy.txt - Section 2",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        },
+        {
+          "id": "e4-2",
+          "documentId": "doc-seed-4",
+          "category": "Requirement",
+          "name": "Permanent Document Deletion",
+          "context": "Atomic purge of storage files and database rows",
+          "sourceRef": "Enterprise_Security_Compliance_Policy.txt - Section 3",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "insights": [
+        {
+          "id": "ins4-1",
+          "documentId": "doc-seed-4",
+          "title": "Mandatory User Isolation Compliance",
+          "description": "System architecture must guarantee zero cross-tenant document leakage via RLS and ownership guards.",
+          "priority": "CRITICAL",
+          "category": "Rule",
+          "sourceRef": "Enterprise_Security_Compliance_Policy.txt - Section 2",
+          "isActionable": true,
+          "recommendedAction": "Conduct automated test suite verifying unauthorized cross-user queries return 404 or 403. (AI Suggestion)",
+          "createdAt": "2026-10-22T15:37:35.393Z"
+        }
+      ],
+      "missingInformation": [],
+      "visualizations": []
+    }
+  ],
+  "settings": {
+    "user-default-1": {
+      "id": "settings-user-default-1",
+      "userId": "user-default-1",
+      "theme": "dark",
+      "emailNotifications": true,
+      "autoAnalyze": true,
+      "defaultModel": "gemini-2.5-flash",
+      "highlights": {
+        "critical": "#ef4444",
+        "important": "#f97316",
+        "warning": "#eab308",
+        "missing": "#a855f7",
+        "conflict": "#ec4899",
+        "deadline": "#3b82f6",
+        "informational": "#10b981"
+      }
+    }
+  },
+  "conflicts": [
+    {
+      "id": "conf-seed-1",
+      "primaryDocId": "doc-seed-2",
+      "primaryDocTitle": "Vendor_Service_Agreement_Acme",
+      "conflictingDocId": "doc-seed-3",
+      "conflictingDocTitle": "Procurement_Purchase_Order_PO8821",
+      "fieldName": "Payment Deadline",
+      "primaryValue": "October 12, 2026",
+      "conflictingValue": "October 15, 2026",
+      "description": "Document 2 (Vendor Agreement) stipulates payment due on October 12, 2026, whereas Document 3 (Purchase Order PO-8821) specifies payment deadline of October 15, 2026 (Net-45 terms).",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "conflictingSourceRef": "Procurement_Purchase_Order_PO8821.docx - Payment Terms",
+      "createdAt": "2026-10-22T15:37:35.393Z",
+      "updatedAt": "2026-10-22T15:37:35.393Z"
+    },
+    {
+      "id": "conf-seed-2",
+      "primaryDocId": "doc-seed-2",
+      "primaryDocTitle": "Vendor_Service_Agreement_Acme",
+      "conflictingDocId": "doc-seed-3",
+      "conflictingDocTitle": "Procurement_Purchase_Order_PO8821",
+      "fieldName": "Contractual Amount Commitment",
+      "primaryValue": "$45,000 USD",
+      "conflictingValue": "$52,000 USD",
+      "description": "Vendor Master Agreement fixes annual fee at $45,000, but Purchase Order PO-8821 allocates $52,000 ($7,000 variance due to added SLA premium line item).",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "conflictingSourceRef": "Procurement_Purchase_Order_PO8821.docx - Line Items",
+      "createdAt": "2026-10-22T15:37:35.393Z",
+      "updatedAt": "2026-10-22T15:37:35.394Z"
+    },
+    {
+      "id": "conf-date-1792683665036-1",
+      "primaryDocId": "doc-seed-2",
+      "primaryDocTitle": "Vendor_Service_Agreement_Acme",
+      "conflictingDocId": "doc-seed-3",
+      "conflictingDocTitle": "Procurement_Purchase_Order_PO8821",
+      "fieldName": "Operational Milestone / Deadline",
+      "primaryValue": "October 12, 2026",
+      "conflictingValue": "October 15, 2026",
+      "description": "Vendor_Service_Agreement_Acme specifies October 12, 2026, while Procurement_Purchase_Order_PO8821 specifies October 15, 2026.",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "conflictingSourceRef": "Procurement_Purchase_Order_PO8821.docx - Payment Terms",
+      "createdAt": "2026-10-22T15:41:05.036Z",
+      "updatedAt": "2026-10-22T15:41:05.036Z"
+    },
+    {
+      "id": "conf-money-1792683665036-2",
+      "primaryDocId": "doc-seed-2",
+      "primaryDocTitle": "Vendor_Service_Agreement_Acme",
+      "conflictingDocId": "doc-seed-3",
+      "conflictingDocTitle": "Procurement_Purchase_Order_PO8821",
+      "fieldName": "Financial Allocation / Rate",
+      "primaryValue": "$45,000 USD",
+      "conflictingValue": "$52,000 USD",
+      "description": "Discrepancy in contractual commitment: Vendor_Service_Agreement_Acme quotes $45,000 USD whereas Procurement_Purchase_Order_PO8821 specifies $52,000 USD.",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "conflictingSourceRef": "Procurement_Purchase_Order_PO8821.docx - Line Items",
+      "createdAt": "2026-10-22T15:41:05.036Z",
+      "updatedAt": "2026-10-22T15:41:05.036Z"
+    },
+    {
+      "id": "conf-money-1792683952904-2",
+      "primaryDocId": "doc-seed-1",
+      "primaryDocTitle": "Sales_Performance_Q4",
+      "conflictingDocId": "doc-seed-2",
+      "conflictingDocTitle": "Vendor_Service_Agreement_Acme",
+      "fieldName": "Financial Allocation / Rate",
+      "primaryValue": "$2,420,000",
+      "conflictingValue": "$45,000 USD",
+      "description": "Discrepancy in contractual commitment: Sales_Performance_Q4 quotes $2,420,000 whereas Vendor_Service_Agreement_Acme specifies $45,000 USD.",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Sales_Performance_Q4.csv - Summary Line",
+      "conflictingSourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "createdAt": "2026-10-22T15:45:52.904Z",
+      "updatedAt": "2026-10-22T15:45:52.904Z"
+    },
+    {
+      "id": "conf-money-1792684054777-2",
+      "primaryDocId": "doc-seed-1",
+      "primaryDocTitle": "Sales_Performance_Q4",
+      "conflictingDocId": "doc-seed-2",
+      "conflictingDocTitle": "Vendor_Service_Agreement_Acme",
+      "fieldName": "Financial Allocation / Rate",
+      "primaryValue": "$2,420,000",
+      "conflictingValue": "$45,000 USD",
+      "description": "Discrepancy in contractual commitment: Sales_Performance_Q4 quotes $2,420,000 whereas Vendor_Service_Agreement_Acme specifies $45,000 USD.",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Sales_Performance_Q4.csv - Summary Line",
+      "conflictingSourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "createdAt": "2026-10-22T15:47:34.777Z",
+      "updatedAt": "2026-10-22T15:47:34.777Z"
+    },
+    {
+      "id": "conf-money-1792766930142-2",
+      "primaryDocId": "doc-seed-1",
+      "primaryDocTitle": "Sales_Performance_Q4",
+      "conflictingDocId": "doc-seed-2",
+      "conflictingDocTitle": "Vendor_Service_Agreement_Acme",
+      "fieldName": "Financial Allocation / Rate",
+      "primaryValue": "$2,420,000",
+      "conflictingValue": "$45,000 USD",
+      "description": "Discrepancy in contractual commitment: Sales_Performance_Q4 quotes $2,420,000 whereas Vendor_Service_Agreement_Acme specifies $45,000 USD.",
+      "status": "NEEDS_HUMAN_REVIEW",
+      "primarySourceRef": "Sales_Performance_Q4.csv - Summary Line",
+      "conflictingSourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+      "createdAt": "2026-10-23T14:48:50.142Z",
+      "updatedAt": "2026-10-23T14:48:50.142Z"
+    }
+  ],
+  "chatMessages": {
+    "session-user-default-1-global": [
+      {
+        "id": "msg-1792683699949-user",
+        "sessionId": "session-user-default-1-global",
+        "role": "user",
+        "content": "What is the payment deadline?",
+        "createdAt": "2026-10-22T15:41:39.949Z"
+      },
+      {
+        "id": "msg-1792683699951-assistant",
+        "sessionId": "session-user-default-1-global",
+        "role": "assistant",
+        "content": "Based on your documents, the following key deadlines were identified:\n• **October 12, 2026** in *Vendor_Service_Agreement_Acme* (Vendor_Service_Agreement_Acme.pdf - Section 4.1)\n• **October 15, 2026** in *Procurement_Purchase_Order_PO8821* (Procurement_Purchase_Order_PO8821.docx - Payment Terms)",
+        "sources": [
+          {
+            "docId": "doc-seed-2",
+            "docTitle": "Vendor_Service_Agreement_Acme",
+            "sourceRef": "Vendor_Service_Agreement_Acme.pdf - Section 4.1",
+            "snippet": "Deadline specified as October 12, 2026"
+          },
+          {
+            "docId": "doc-seed-3",
+            "docTitle": "Procurement_Purchase_Order_PO8821",
+            "sourceRef": "Procurement_Purchase_Order_PO8821.docx - Payment Terms",
+            "snippet": "Deadline specified as October 15, 2026"
+          }
+        ],
+        "createdAt": "2026-10-22T15:41:39.951Z"
+      }
+    ]
+  }
+}
