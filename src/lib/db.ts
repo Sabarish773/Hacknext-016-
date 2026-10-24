@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { loadState, saveState } from './pg';
 import {
   User,
   UserProfile,
@@ -49,9 +50,9 @@ function ensureDataDir(): void {
 }
 
 // Read database file
-function readLocalDb(): LocalDatabaseState {
-  ensureDataDir();
-  if (!fs.existsSync(DB_FILE)) {
+async function readLocalDb(): Promise<LocalDatabaseState> {
+  const stored = await loadState();
+  if (!stored) {
     const defaultUserId = 'user-default-1';
     const seed = getSeedDocuments(defaultUserId);
 
@@ -98,12 +99,12 @@ function readLocalDb(): LocalDatabaseState {
       conflicts: seed.conflicts,
       chatMessages: {},
     };
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialState, null, 2), 'utf-8');
+    await saveState(initialState);
     return initialState;
   }
 
   try {
-    const raw = fs.readFileSync(DB_FILE, 'utf-8');
+    const raw = JSON.stringify(stored);
     return JSON.parse(raw);
   } catch (err) {
     console.error('Error reading local db, initializing clean state:', err);
@@ -119,17 +120,14 @@ function readLocalDb(): LocalDatabaseState {
 }
 
 // Write to database file atomically
-function writeLocalDb(state: LocalDatabaseState): void {
-  ensureDataDir();
-  const tempFile = `${DB_FILE}.tmp`;
-  fs.writeFileSync(tempFile, JSON.stringify(state, null, 2), 'utf-8');
-  fs.renameSync(tempFile, DB_FILE);
+async function writeLocalDb(state: LocalDatabaseState): Promise<void> {
+  await saveState(state);
 }
 
 export const db = {
   // USER & PROFILE
   async getUser(id: string): Promise<User | null> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const user = state.users.find((u) => u.id === id) || null;
     if (user) {
       user.profile = state.profiles.find((p) => p.userId === id) || null;
@@ -138,7 +136,7 @@ export const db = {
   },
 
   async getUserByEmail(email: string): Promise<User | null> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const user = state.users.find((u) => u.email.toLowerCase() === email.toLowerCase()) || null;
     if (user) {
       user.profile = state.profiles.find((p) => p.userId === user.id) || null;
@@ -147,7 +145,7 @@ export const db = {
   },
 
   async upsertUser(user: { id: string; email: string; name?: string | null; avatarUrl?: string | null }): Promise<User> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const existingIndex = state.users.findIndex((u) => u.id === user.id || u.email.toLowerCase() === user.email.toLowerCase());
     const now = new Date().toISOString();
 
@@ -181,12 +179,12 @@ export const db = {
         highlights: { ...DEFAULT_HIGHLIGHTS },
       };
     }
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return savedUser;
   },
 
   async updateProfile(userId: string, profileData: Partial<UserProfile>): Promise<UserProfile> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const now = new Date().toISOString();
     const index = state.profiles.findIndex((p) => p.userId === userId);
 
@@ -216,13 +214,13 @@ export const db = {
       };
       state.profiles.push(updated);
     }
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return updated;
   },
 
   // SETTINGS & HIGHLIGHTS
   async getUserSettings(userId: string): Promise<UserSettings> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     if (!state.settings[userId]) {
       state.settings[userId] = {
         id: `settings-${userId}`,
@@ -233,26 +231,26 @@ export const db = {
         defaultModel: 'gemini-2.5-flash',
         highlights: { ...DEFAULT_HIGHLIGHTS },
       };
-      writeLocalDb(state);
+      await writeLocalDb(state);
     }
     return state.settings[userId];
   },
 
   async updateHighlightSettings(userId: string, highlights: Partial<HighlightColorSettings>): Promise<HighlightColorSettings> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const currentSettings = await this.getUserSettings(userId);
     currentSettings.highlights = {
       ...currentSettings.highlights,
       ...highlights,
     };
     state.settings[userId] = currentSettings;
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return currentSettings.highlights;
   },
 
   // DOCUMENTS
   async getDocuments(userId: string): Promise<DocumentItem[]> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const userDocs = state.documents.filter((d) => d.userId === userId);
     // Sort chronologically ascending for stable library 1-based numbering
     userDocs.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -268,7 +266,7 @@ export const db = {
   },
 
   async createDocument(doc: Omit<DocumentItem, 'createdAt' | 'updatedAt'>): Promise<DocumentItem> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const now = new Date().toISOString();
     const newDoc: DocumentItem = {
       ...doc,
@@ -277,12 +275,12 @@ export const db = {
       status: doc.status || 'UPLOADING',
     };
     state.documents.push(newDoc);
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return newDoc;
   },
 
   async updateDocument(userId: string, id: string, updates: Partial<DocumentItem>): Promise<DocumentItem | null> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const index = state.documents.findIndex((d) => d.id === id && d.userId === userId);
     if (index === -1) return null;
 
@@ -291,12 +289,12 @@ export const db = {
       ...updates,
       updatedAt: new Date().toISOString(),
     };
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return state.documents[index];
   },
 
   async deleteDocument(userId: string, id: string): Promise<boolean> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const initialLen = state.documents.length;
     state.documents = state.documents.filter((d) => !(d.id === id && d.userId === userId));
 
@@ -308,13 +306,13 @@ export const db = {
     // Also remove chat messages
     delete state.chatMessages[id];
 
-    writeLocalDb(state);
+    await writeLocalDb(state);
     return state.documents.length < initialLen;
   },
 
   // CONFLICTS
   async getConflicts(userId: string): Promise<Conflict[]> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     const userDocs = state.documents.filter((d) => d.userId === userId);
     const docIds = new Set(userDocs.map((d) => d.id));
     return state.conflicts.filter(
@@ -323,7 +321,7 @@ export const db = {
   },
 
   async saveConflicts(conflicts: Conflict[]): Promise<void> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     // Merge or replace conflicts
     for (const conf of conflicts) {
       const idx = state.conflicts.findIndex((c) => c.id === conf.id);
@@ -333,22 +331,22 @@ export const db = {
         state.conflicts.push(conf);
       }
     }
-    writeLocalDb(state);
+    await writeLocalDb(state);
   },
 
   // CHAT MESSAGES
   async getChatMessages(sessionId: string): Promise<ChatMessage[]> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     return state.chatMessages[sessionId] || [];
   },
 
   async addChatMessage(sessionId: string, message: ChatMessage): Promise<void> {
-    const state = readLocalDb();
+    const state = await readLocalDb();
     if (!state.chatMessages[sessionId]) {
       state.chatMessages[sessionId] = [];
     }
     state.chatMessages[sessionId].push(message);
-    writeLocalDb(state);
+    await writeLocalDb(state);
   },
 
   // DASHBOARD STATS

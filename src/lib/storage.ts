@@ -1,13 +1,5 @@
-import fs from 'fs';
 import path from 'path';
-
-const UPLOADS_DIR = path.join(process.cwd(), 'public', 'uploads');
-
-function ensureUploadsDir(): void {
-  if (!fs.existsSync(UPLOADS_DIR)) {
-    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-  }
-}
+import { putFile, getFile, removeFile } from './pg';
 
 export interface StoredFileResult {
   storagePath: string;
@@ -18,19 +10,17 @@ export interface StoredFileResult {
 
 export const storage = {
   async saveFile(buffer: Buffer, originalFileName: string): Promise<StoredFileResult> {
-    ensureUploadsDir();
     const safeExt = path.extname(originalFileName) || '.bin';
     const timestamp = Date.now();
     const cleanBaseName = path
       .basename(originalFileName, safeExt)
       .replace(/[^a-zA-Z0-9_-]/g, '_');
     const uniqueFileName = `${cleanBaseName}_${timestamp}${safeExt}`;
-    const destinationPath = path.join(UPLOADS_DIR, uniqueFileName);
 
-    await fs.promises.writeFile(destinationPath, buffer);
+    await putFile(uniqueFileName, buffer);
 
     return {
-      storagePath: destinationPath,
+      storagePath: uniqueFileName,
       publicUrl: `/uploads/${uniqueFileName}`,
       fileSizeBytes: buffer.length,
       fileName: uniqueFileName,
@@ -39,13 +29,7 @@ export const storage = {
 
   async deleteFile(storagePathOrUrl: string): Promise<boolean> {
     try {
-      const fileName = path.basename(storagePathOrUrl);
-      const safePath = path.join(UPLOADS_DIR, fileName);
-      if (fs.existsSync(safePath)) {
-        await fs.promises.unlink(safePath);
-        return true;
-      }
-      return false;
+      return await removeFile(path.basename(storagePathOrUrl));
     } catch (err) {
       console.error('Error deleting file:', err);
       return false;
@@ -54,12 +38,7 @@ export const storage = {
 
   async readFile(storagePathOrUrl: string): Promise<Buffer | null> {
     try {
-      const fileName = path.basename(storagePathOrUrl);
-      const safePath = path.join(UPLOADS_DIR, fileName);
-      if (fs.existsSync(safePath)) {
-        return await fs.promises.readFile(safePath);
-      }
-      return null;
+      return await getFile(path.basename(storagePathOrUrl));
     } catch (err) {
       console.error('Error reading file from storage:', err);
       return null;
