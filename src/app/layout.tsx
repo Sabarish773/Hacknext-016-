@@ -1,23 +1,16 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { HighlightProvider } from '@/context/HighlightContext';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'Doc.DOOM — Enterprise Information Intelligence',
   description:
     'AI-powered information intelligence system that understands documents, discovers structured facts, detects missing and conflicting information, generates document-specific visualizations, and enables verified action.',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark h-full antialiased bg-slate-950 text-slate-100">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-slate-950 text-slate-100 font-sans`}>
+    <html lang="en" className="dark h-full antialiased bg-[#111111] text-[#ededed]">
+      <body className="min-h-full flex flex-col bg-[#111111] text-[#ededed] font-sans selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
         <AuthProvider>
           <HighlightProvider>{children}</HighlightProvider>
         </AuthProvider>

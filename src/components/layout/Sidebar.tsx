@@ -13,14 +13,13 @@ import {
   Settings,
   Mail,
   LogOut,
-  Layers,
   ChevronRight,
   Menu,
   X,
-  ShieldCheck,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { ContactModal } from './ContactModal';
+import { Logo } from '@/components/common/Logo';
 
 interface NavItem {
   name: string;
@@ -54,16 +53,14 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Menu Trigger Bar */}
-      <div className="lg:hidden flex items-center justify-between bg-slate-900 border-b border-slate-800 px-4 py-3 sticky top-0 z-40">
+      <div className="lg:hidden flex items-center justify-between bg-[#111111] border-b border-[#262626] px-4 py-3 sticky top-0 z-40">
         <Link href="/dashboard" className="flex items-center space-x-2.5">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-black text-sm">
-            DD
-          </div>
+          <Logo size="sm" />
           <span className="text-lg font-black tracking-tight text-white">Doc.DOOM</span>
         </Link>
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
+          className="p-2 text-[#a3a3a3] hover:text-[#00E5FF] rounded-lg hover:bg-[#1a1a1a] transition"
           aria-label="Toggle Navigation"
         >
           {isMobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -73,32 +70,32 @@ export function Sidebar() {
       {/* Overlay for mobile drawer */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/75 backdrop-blur-sm lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 z-50 flex h-screen w-64 flex-col justify-between border-r border-slate-800 bg-slate-950 p-4 transition-transform duration-200 lg:translate-x-0 ${
+        className={`fixed lg:sticky top-0 left-0 z-50 flex h-screen w-64 flex-col justify-between border-r border-[#262626] bg-[#111111] p-4 transition-transform duration-200 lg:translate-x-0 ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div>
           {/* Brand Header */}
-          <div className="flex items-center justify-between pb-6 pt-2 px-2 border-b border-slate-800/80">
-            <Link href="/dashboard" className="flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600 shadow-xl shadow-blue-600/25 text-white font-black text-base border border-blue-400/30">
-                DD
-              </div>
+          <div className="flex items-center justify-between pb-6 pt-2 px-2 border-b border-[#262626]">
+            <Link href="/dashboard" className="flex items-center space-x-3 group">
+              <Logo size="md" priority />
               <div>
                 <div className="flex items-center space-x-1.5">
-                  <span className="text-xl font-extrabold tracking-tight text-white">Doc.DOOM</span>
-                  <span className="rounded bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-semibold text-blue-400 border border-blue-500/20">
+                  <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-[#00E5FF] transition">
+                    Doc.DOOM
+                  </span>
+                  <span className="rounded bg-[#00E5FF]/10 px-1.5 py-0.5 text-[10px] font-semibold text-[#00E5FF] border border-[#00E5FF]/20">
                     PS01
                   </span>
                 </div>
-                <p className="text-[11px] font-medium text-slate-400">Information Intelligence</p>
+                <p className="text-[11px] font-medium text-[#737373]">Information Intelligence</p>
               </div>
             </Link>
           </div>
@@ -115,20 +112,20 @@ export function Sidebar() {
                   onClick={() => setIsMobileOpen(false)}
                   className={`group flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition ${
                     active
-                      ? 'bg-blue-600/15 text-blue-400 border border-blue-500/30 shadow-sm'
-                      : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+                      ? 'bg-[#00E5FF]/12 text-[#00E5FF] border border-[#00E5FF]/30 shadow-sm shadow-[#00E5FF]/5'
+                      : 'text-[#a3a3a3] hover:bg-[#181818] hover:text-white border border-transparent'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <Icon
                       className={`h-4.5 w-4.5 transition ${
-                        active ? 'text-blue-400' : 'text-slate-400 group-hover:text-slate-200'
+                        active ? 'text-[#00E5FF]' : 'text-[#737373] group-hover:text-[#00E5FF]'
                       }`}
                     />
                     <span>{item.name}</span>
                   </div>
                   {item.badge && (
-                    <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold text-amber-300 border border-amber-500/30">
+                    <span className="rounded-full bg-[#00E5FF]/10 px-2 py-0.5 text-[10px] font-semibold text-[#00E5FF] border border-[#00E5FF]/30">
                       {item.badge}
                     </span>
                   )}
@@ -143,42 +140,42 @@ export function Sidebar() {
                 setIsContactOpen(true);
                 setIsMobileOpen(false);
               }}
-              className="w-full flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition text-left"
+              className="w-full flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-[#a3a3a3] hover:bg-[#181818] hover:text-white transition text-left border border-transparent"
             >
               <div className="flex items-center space-x-3">
-                <Mail className="h-4.5 w-4.5 text-slate-400" />
+                <Mail className="h-4.5 w-4.5 text-[#737373]" />
                 <span>Contact Us</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-slate-600" />
+              <ChevronRight className="h-4 w-4 text-[#525252]" />
             </button>
           </nav>
         </div>
 
         {/* User Footer / Profile Summary */}
-        <div className="border-t border-slate-800/80 pt-4">
-          <div className="flex items-center justify-between rounded-xl bg-slate-900/80 p-2.5 border border-slate-800">
+        <div className="border-t border-[#262626] pt-4">
+          <div className="flex items-center justify-between rounded-xl bg-[#161616] p-2.5 border border-[#262626]">
             <Link href="/profile" className="flex items-center space-x-2.5 overflow-hidden flex-1 group">
-              <div className="relative h-8 w-8 rounded-full overflow-hidden bg-slate-800 border border-slate-700 flex-shrink-0">
+              <div className="relative h-8 w-8 rounded-full overflow-hidden bg-[#222222] border border-[#333333] flex-shrink-0">
                 {user?.avatarUrl ? (
                   <img src={user.avatarUrl} alt={user.name || 'User'} className="h-full w-full object-cover" />
                 ) : (
-                  <div className="h-full w-full flex items-center justify-center font-bold text-xs text-blue-400 bg-blue-900/30">
+                  <div className="h-full w-full flex items-center justify-center font-bold text-xs text-[#00E5FF] bg-[#00E5FF]/10">
                     {(user?.name || 'U')[0].toUpperCase()}
                   </div>
                 )}
               </div>
               <div className="truncate">
-                <p className="text-xs font-semibold text-white group-hover:text-blue-400 transition truncate">
+                <p className="text-xs font-semibold text-white group-hover:text-[#00E5FF] transition truncate">
                   {user?.name || 'Enterprise User'}
                 </p>
-                <p className="text-[10px] text-slate-400 truncate">{user?.email || 'Authenticated'}</p>
+                <p className="text-[10px] text-[#737373] truncate">{user?.email || 'Authenticated'}</p>
               </div>
             </Link>
 
             <button
               onClick={logout}
               title="Sign Out"
-              className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-950/30 rounded-lg transition ml-1"
+              className="p-1.5 text-[#737373] hover:text-red-400 hover:bg-red-950/30 rounded-lg transition ml-1"
             >
               <LogOut className="h-4 w-4" />
             </button>

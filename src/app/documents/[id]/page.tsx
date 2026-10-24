@@ -4,33 +4,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
-  Files,
   ArrowLeft,
   Download,
   Trash2,
   Sparkles,
-  AlertTriangle,
   CheckCircle2,
-  Clock,
-  DollarSign,
-  Building,
-  User,
-  MapPin,
-  Tag,
   BarChart3,
   Bot,
   FileText,
-  ShieldAlert,
-  ChevronRight,
-  ExternalLink,
-  HelpCircle,
 } from 'lucide-react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
 import { PriorityBadge } from '@/components/common/PriorityBadge';
 import { DocumentChartRenderer } from '@/components/visualizations/DocumentChartRenderer';
 import { useAuth } from '@/context/AuthContext';
-import { useHighlights } from '@/context/HighlightContext';
 import { DocumentItem } from '@/types';
 
 export default function DocumentDetailsPage() {
@@ -38,7 +25,6 @@ export default function DocumentDetailsPage() {
   const router = useRouter();
   const docId = params.id as string;
   const { user } = useAuth();
-  const { getColorForCategory } = useHighlights();
 
   const [document, setDocument] = useState<DocumentItem | null>(null);
   const [activeTab, setActiveTab] = useState<
@@ -64,7 +50,7 @@ export default function DocumentDetailsPage() {
       }
     }
     loadDoc();
-  }, [user, docId]);
+  }, [user, docId, router]);
 
   const handleDelete = async () => {
     if (!document) return;
@@ -79,12 +65,12 @@ export default function DocumentDetailsPage() {
 
   if (isLoading || !document) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col lg:flex-row">
+      <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col lg:flex-row">
         <Sidebar />
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-3">
-            <Sparkles className="h-8 w-8 animate-spin mx-auto text-blue-400" />
-            <p className="text-xs text-slate-400">Loading document intelligence...</p>
+            <Sparkles className="h-8 w-8 animate-spin mx-auto text-[#00E5FF]" />
+            <p className="text-xs text-[#737373]">Loading document intelligence...</p>
           </div>
         </div>
       </div>
@@ -99,7 +85,7 @@ export default function DocumentDetailsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col lg:flex-row selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -110,7 +96,7 @@ export default function DocumentDetailsPage() {
           <div className="flex items-center justify-between">
             <Link
               href="/documents"
-              className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-400 hover:text-white transition"
+              className="inline-flex items-center space-x-1.5 text-xs font-semibold text-[#a3a3a3] hover:text-[#00E5FF] transition"
             >
               <ArrowLeft className="h-4 w-4" />
               <span>Back to Library</span>
@@ -119,9 +105,9 @@ export default function DocumentDetailsPage() {
             <div className="flex items-center space-x-2">
               <Link
                 href={`/chat?docId=${document.id}`}
-                className="flex items-center space-x-1.5 rounded-xl border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1.5 text-xs font-semibold text-blue-300 transition"
+                className="flex items-center space-x-1.5 rounded-xl border border-[#00E5FF]/30 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 px-3 py-1.5 text-xs font-semibold text-[#00E5FF] transition"
               >
-                <Bot className="h-3.5 w-3.5 text-blue-400" />
+                <Bot className="h-3.5 w-3.5 text-[#00E5FF]" />
                 <span>Ask AI About This Doc</span>
               </Link>
 
@@ -131,9 +117,9 @@ export default function DocumentDetailsPage() {
                   download={document.originalName}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-300 transition"
+                  className="flex items-center space-x-1.5 rounded-xl border border-[#262626] bg-[#161616] hover:bg-[#222222] px-3 py-1.5 text-xs font-semibold text-[#ededed] transition"
                 >
-                  <Download className="h-3.5 w-3.5" />
+                  <Download className="h-3.5 w-3.5 text-[#a3a3a3]" />
                   <span>Download File</span>
                 </a>
               )}
@@ -149,14 +135,14 @@ export default function DocumentDetailsPage() {
           </div>
 
           {/* Document Intelligence Hero Header */}
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/90 p-6 md:p-8 space-y-4">
+          <div className="rounded-3xl border border-[#262626] bg-[#161616] p-6 md:p-8 space-y-4 shadow-sm cyan-glow">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                  <span className="font-mono text-xs font-bold text-[#00E5FF] bg-[#00E5FF]/10 px-2 py-0.5 rounded border border-[#00E5FF]/25">
                     DOCUMENT {document.docNumber || 1}
                   </span>
-                  <span className="rounded bg-slate-800 px-2 py-0.5 text-xs text-slate-300 border border-slate-700 font-medium">
+                  <span className="rounded bg-[#1f1f1f] px-2 py-0.5 text-xs text-[#a3a3a3] border border-[#262626] font-medium">
                     {document.analysis?.category || 'General'}
                   </span>
                   <span className="rounded bg-emerald-950/60 px-2 py-0.5 text-xs text-emerald-400 border border-emerald-800/60 font-medium">
@@ -166,7 +152,7 @@ export default function DocumentDetailsPage() {
                 <h1 className="text-2xl sm:text-3xl font-black text-white mt-2 tracking-tight">
                   {document.title}
                 </h1>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Original: {document.originalName} • {(document.fileSizeBytes / 1024).toFixed(0)} KB •{' '}
                   {document.pageCount || 1} Page(s) • Processed in{' '}
                   {document.analysis?.processingDurationMs || 850}ms
@@ -174,24 +160,24 @@ export default function DocumentDetailsPage() {
               </div>
 
               {/* Confidence Score Pill */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 text-center min-w-[130px] flex-shrink-0">
-                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+              <div className="rounded-2xl border border-[#262626] bg-[#111111] p-4 text-center min-w-[130px] flex-shrink-0">
+                <span className="text-[10px] font-semibold text-[#737373] uppercase tracking-wider">
                   Cognitive Confidence
                 </span>
-                <p className="text-2xl font-black text-blue-400 mt-0.5">
+                <p className="text-2xl font-black text-[#00E5FF] mt-0.5">
                   {Math.round((document.analysis?.confidenceScore || 0.95) * 100)}%
                 </p>
               </div>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="pt-4 border-t border-slate-800/80 flex items-center space-x-2 overflow-x-auto scrollbar-none text-xs font-semibold">
+            <div className="pt-4 border-t border-[#262626] flex items-center space-x-2 overflow-x-auto scrollbar-none text-xs font-semibold">
               <button
                 onClick={() => setActiveTab('overview')}
                 className={`px-3.5 py-2 rounded-xl transition ${
                   activeTab === 'overview'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 Overview & Summary
@@ -200,8 +186,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('important')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'important'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <span>Important Information & Highlights</span>
@@ -210,8 +196,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('entities')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'entities'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <span>Entities ({document.entities?.length || 0})</span>
@@ -220,8 +206,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('missing')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'missing'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <span>Missing Info ({document.missingInformation?.length || 0})</span>
@@ -230,8 +216,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('insights')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'insights'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <span>Actionable Insights ({document.insights?.length || 0})</span>
@@ -240,8 +226,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('charts')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'charts'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <BarChart3 className="h-3.5 w-3.5" />
@@ -251,8 +237,8 @@ export default function DocumentDetailsPage() {
                 onClick={() => setActiveTab('raw')}
                 className={`px-3.5 py-2 rounded-xl transition flex items-center space-x-1.5 ${
                   activeTab === 'raw'
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-[#00E5FF] text-[#111111] font-bold shadow-md shadow-[#00E5FF]/20'
+                    : 'text-[#a3a3a3] hover:bg-[#1f1f1f] hover:text-white'
                 }`}
               >
                 <FileText className="h-3.5 w-3.5" />
@@ -264,29 +250,29 @@ export default function DocumentDetailsPage() {
           {/* TAB 1: OVERVIEW */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4">
+              <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-4">
                 <h3 className="text-base font-bold text-white">Executive Short Summary</h3>
-                <p className="text-sm text-slate-200 leading-relaxed">
+                <p className="text-sm text-[#ededed] leading-relaxed">
                   {document.analysis?.shortSummary}
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-3">
+                <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-3">
                   <h3 className="text-sm font-bold text-white">Primary Purpose</h3>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-[#a3a3a3] leading-relaxed">
                     {document.analysis?.mainPurpose}
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-3">
+                <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-3">
                   <h3 className="text-sm font-bold text-white">Key Topics & Taxonomy</h3>
                   <div className="flex flex-wrap gap-2">
                     {document.analysis?.keyTopics &&
                       document.analysis.keyTopics.map((topic, i) => (
                         <span
                           key={i}
-                          className="rounded-lg bg-blue-600/10 border border-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-300"
+                          className="rounded-lg bg-[#00E5FF]/10 border border-[#00E5FF]/20 px-3 py-1 text-xs font-semibold text-[#00E5FF]"
                         >
                           #{topic}
                         </span>
@@ -295,9 +281,9 @@ export default function DocumentDetailsPage() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-3">
+              <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-3">
                 <h3 className="text-base font-bold text-white">Detailed Cognitive Breakdown</h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+                <p className="text-xs sm:text-sm text-[#a3a3a3] leading-relaxed whitespace-pre-line">
                   {document.analysis?.detailedSummary}
                 </p>
               </div>
@@ -306,10 +292,10 @@ export default function DocumentDetailsPage() {
 
           {/* TAB 2: IMPORTANT INFORMATION & HIGHLIGHTS */}
           {activeTab === 'important' && (
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-6">
+            <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-6">
               <div>
                 <h3 className="text-base font-bold text-white">Important Information & Rules</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Extracted facts, deadlines, financial figures, and compliance constraints with customizable priority highlights.
                 </p>
               </div>
@@ -318,19 +304,19 @@ export default function DocumentDetailsPage() {
                 {document.insights?.map((ins) => (
                   <div
                     key={ins.id}
-                    className="p-4 rounded-xl border border-slate-800 bg-slate-950/70 space-y-2 hover:border-slate-700 transition"
+                    className="p-4 rounded-xl border border-[#262626] bg-[#111111] space-y-2 hover:border-[#00E5FF]/30 transition"
                   >
                     <div className="flex items-center justify-between">
                       <PriorityBadge priorityOrCategory={ins.priority} />
-                      <span className="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono text-[#a3a3a3] bg-[#181818] border border-[#262626] px-2 py-0.5 rounded">
                         {ins.sourceRef || `${document.title} - Section 1`}
                       </span>
                     </div>
                     <h4 className="text-sm font-bold text-white">{ins.title}</h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">{ins.description}</p>
+                    <p className="text-xs text-[#a3a3a3] leading-relaxed">{ins.description}</p>
                     {ins.recommendedAction && (
-                      <div className="mt-2 pt-2 border-t border-slate-800/80 text-xs text-blue-300">
-                        <span className="font-semibold text-blue-400">Next Step (AI Suggestion): </span>
+                      <div className="mt-2 pt-2 border-t border-[#262626] text-xs text-[#00E5FF]">
+                        <span className="font-semibold text-[#00E5FF]">Next Step (AI Suggestion): </span>
                         {ins.recommendedAction}
                       </div>
                     )}
@@ -342,10 +328,10 @@ export default function DocumentDetailsPage() {
 
           {/* TAB 3: KEY ENTITIES */}
           {activeTab === 'entities' && (
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-6">
+            <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-6">
               <div>
                 <h3 className="text-base font-bold text-white">Detected Enterprise Entities</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Only categories actually identified in this document are shown. No fabricated entities.
                 </p>
               </div>
@@ -354,13 +340,13 @@ export default function DocumentDetailsPage() {
                 {Object.entries(entitiesByCategory).map(([category, items]) => (
                   <div
                     key={category}
-                    className="rounded-xl border border-slate-800 bg-slate-950/70 p-4 space-y-3"
+                    className="rounded-xl border border-[#262626] bg-[#111111] p-4 space-y-3"
                   >
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
+                    <div className="flex items-center justify-between border-b border-[#262626] pb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#00E5FF]">
                         {category}
                       </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#181818] border border-[#262626] text-[#a3a3a3]">
                         {items?.length || 0}
                       </span>
                     </div>
@@ -369,9 +355,9 @@ export default function DocumentDetailsPage() {
                       {items?.map((item) => (
                         <div key={item.id} className="text-xs">
                           <p className="font-semibold text-white">{item.name}</p>
-                          {item.context && <p className="text-[11px] text-slate-400">{item.context}</p>}
+                          {item.context && <p className="text-[11px] text-[#a3a3a3]">{item.context}</p>}
                           {item.sourceRef && (
-                            <p className="text-[10px] font-mono text-slate-400 mt-0.5">{item.sourceRef}</p>
+                            <p className="text-[10px] font-mono text-[#737373] mt-0.5">{item.sourceRef}</p>
                           )}
                         </div>
                       ))}
@@ -384,10 +370,10 @@ export default function DocumentDetailsPage() {
 
           {/* TAB 4: MISSING INFORMATION DETECTION */}
           {activeTab === 'missing' && (
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-6">
+            <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-6">
               <div>
                 <h3 className="text-base font-bold text-white">Missing Information & Gap Analysis</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Identifies missing or incomplete items based on evidence from document structure.
                 </p>
               </div>
@@ -397,23 +383,23 @@ export default function DocumentDetailsPage() {
                   {document.missingInformation.map((item) => (
                     <div
                       key={item.id}
-                      className="p-4 rounded-xl border border-purple-500/20 bg-purple-950/10 space-y-2"
+                      className="p-4 rounded-xl border border-[#00E5FF]/20 bg-[#00E5FF]/5 space-y-2"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <PriorityBadge priorityOrCategory="MISSING" label={item.status} />
                           <span className="text-sm font-bold text-white">{item.itemName}</span>
                         </div>
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-purple-900/40 text-purple-300 border border-purple-800/40">
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#181818] text-[#00E5FF] border border-[#00E5FF]/30">
                           Severity: {item.severity}
                         </span>
                       </div>
 
-                      <p className="text-xs text-slate-300">{item.reason}</p>
+                      <p className="text-xs text-[#ededed]">{item.reason}</p>
 
                       {item.evidence && (
-                        <div className="rounded-lg bg-slate-900 p-2.5 text-[11px] text-slate-400 font-mono">
-                          <strong>Context Evidence: </strong>
+                        <div className="rounded-lg bg-[#111111] border border-[#262626] p-2.5 text-[11px] text-[#a3a3a3] font-mono">
+                          <strong className="text-white">Context Evidence: </strong>
                           {item.evidence}
                         </div>
                       )}
@@ -421,7 +407,7 @@ export default function DocumentDetailsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="py-12 text-center text-slate-400 text-xs">
+                <div className="py-12 text-center text-[#737373] text-xs">
                   <CheckCircle2 className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
                   No critical missing information or compliance gaps were identified in this document.
                 </div>
@@ -431,10 +417,10 @@ export default function DocumentDetailsPage() {
 
           {/* TAB 5: ACTIONABLE INSIGHTS */}
           {activeTab === 'insights' && (
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-6">
+            <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-6">
               <div>
                 <h3 className="text-base font-bold text-white">Actionable Enterprise Insights</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Synthesized recommendations labeled clearly as AI-generated suggestions.
                 </p>
               </div>
@@ -443,19 +429,19 @@ export default function DocumentDetailsPage() {
                 {document.insights?.map((ins) => (
                   <div
                     key={ins.id}
-                    className="p-5 rounded-xl border border-slate-800 bg-slate-950/80 space-y-3"
+                    className="p-5 rounded-xl border border-[#262626] bg-[#111111] space-y-3 hover:border-[#00E5FF]/30 transition"
                   >
                     <div className="flex items-center justify-between">
                       <PriorityBadge priorityOrCategory={ins.priority} />
-                      <span className="text-xs font-mono text-slate-400">{ins.sourceRef}</span>
+                      <span className="text-xs font-mono text-[#737373]">{ins.sourceRef}</span>
                     </div>
 
                     <h4 className="text-base font-bold text-white">{ins.title}</h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{ins.description}</p>
+                    <p className="text-xs sm:text-sm text-[#a3a3a3] leading-relaxed">{ins.description}</p>
 
                     {ins.recommendedAction && (
-                      <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-xs text-blue-200">
-                        <span className="font-bold text-blue-400">Recommended Action (AI Suggestion): </span>
+                      <div className="rounded-xl border border-[#00E5FF]/25 bg-[#00E5FF]/10 p-3 text-xs text-[#ededed]">
+                        <span className="font-bold text-[#00E5FF]">Recommended Action (AI Suggestion): </span>
                         {ins.recommendedAction}
                       </div>
                     )}
@@ -470,7 +456,7 @@ export default function DocumentDetailsPage() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-base font-bold text-white">Document-Specific Visualizations</h3>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-[#737373] mt-1">
                   Plots are generated exclusively from quantitative data in this document.
                 </p>
               </div>
@@ -484,12 +470,12 @@ export default function DocumentDetailsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-900/40 p-12 text-center text-slate-400 space-y-2">
-                  <BarChart3 className="h-8 w-8 mx-auto text-slate-600" />
-                  <p className="text-sm font-semibold text-slate-300">
+                <div className="rounded-2xl border border-dashed border-[#262626] bg-[#161616]/40 p-12 text-center text-[#737373] space-y-2">
+                  <BarChart3 className="h-8 w-8 mx-auto text-[#525252]" />
+                  <p className="text-sm font-semibold text-white">
                     No meaningful visualization available for this document.
                   </p>
-                  <p className="text-xs max-w-md mx-auto text-slate-400">
+                  <p className="text-xs max-w-md mx-auto text-[#737373]">
                     This document contains qualitative narrative or policy guidelines without quantitative numerical series. Doc.DOOM does not generate irrelevant or misleading charts.
                   </p>
                 </div>
@@ -499,20 +485,20 @@ export default function DocumentDetailsPage() {
 
           {/* TAB 7: SOURCE TRACEABILITY */}
           {activeTab === 'raw' && (
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4">
+            <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base font-bold text-white">Source Text & Traceability Viewer</h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-[#737373]">
                     Verify extracted information directly against parsed text.
                   </p>
                 </div>
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-[#00E5FF]">
                   {document.rawText?.length || 0} characters
                 </span>
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950 p-4 font-mono text-xs text-slate-300 leading-relaxed overflow-x-auto max-h-[500px] overflow-y-auto whitespace-pre-wrap select-text">
+              <div className="rounded-xl border border-[#262626] bg-[#111111] p-4 font-mono text-xs text-[#ededed] leading-relaxed overflow-x-auto max-h-[500px] overflow-y-auto whitespace-pre-wrap select-text">
                 {document.rawText || 'No raw text available.'}
               </div>
             </div>
