@@ -1,4 +1,3 @@
-import { PDFParse } from 'pdf-parse';
 
 export interface ParsedPdfResult {
   text: string;
@@ -9,6 +8,7 @@ export interface ParsedPdfResult {
 export async function parsePdf(buffer: Buffer): Promise<ParsedPdfResult> {
   let parser: any = null;
   try {
+    const { PDFParse } = await import('pdf-parse');
     parser = new PDFParse({ data: buffer });
     const res = await parser.getText();
     const text = res?.text || '';

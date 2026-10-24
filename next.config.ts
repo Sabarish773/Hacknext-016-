@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  serverExternalPackages: ["pdf-parse", "tesseract.js", "mammoth", "xlsx"],
+  serverExternalPackages: ["pdf-parse", "pdfjs-dist", "@napi-rs/canvas", "tesseract.js", "mammoth", "xlsx"],
 };
 
 export default nextConfig;
