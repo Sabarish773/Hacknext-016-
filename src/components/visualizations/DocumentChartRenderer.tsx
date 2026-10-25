@@ -25,8 +25,8 @@ interface ChartRendererProps {
   config: VisualizationConfig;
 }
 
-// Dedicated Cyan Aash palette with carefully chosen harmonic shades
-const PALETTE = ['#00E5FF', '#00B4D8', '#38BDF8', '#06B6D4', '#0891B2', '#67E8F9', '#99F6E4'];
+// Royal Blue harmonic palette
+const PALETTE = ['#014BAA', '#0D6EFD', '#2563EB', '#3B82F6', '#60A5FA', '#93C5FD', '#1E40AF'];
 
 export function DocumentChartRenderer({ config }: ChartRendererProps) {
   const data = config.data || [];
@@ -35,7 +35,7 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
 
   if (!data || data.length === 0) {
     return (
-      <div className="rounded-2xl border border-[#262626] bg-[#161616] p-6 text-center text-[#737373]">
+      <div className="rounded-2xl border border-[#DCE5EE] bg-white p-6 text-center text-[#64748B]">
         No plot points available for this visualization.
       </div>
     );
@@ -44,25 +44,25 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
   // 1. KPI Cards
   if (config.chartType === 'kpi') {
     return (
-      <div className="rounded-2xl border border-[#262626] bg-[#161616] p-5 shadow-sm">
+      <div className="rounded-2xl border border-[#DCE5EE] bg-white p-5 royal-shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h4 className="text-sm font-bold text-white flex items-center space-x-2">
-              <Activity className="h-4 w-4 text-[#00E5FF]" />
+            <h4 className="text-sm font-bold text-[#0B192C] font-heading flex items-center space-x-2">
+              <Activity className="h-4 w-4 text-[#014BAA]" />
               <span>{config.title}</span>
             </h4>
-            {config.description && <p className="text-xs text-[#a3a3a3] mt-0.5">{config.description}</p>}
+            {config.description && <p className="text-xs text-[#64748B] mt-0.5">{config.description}</p>}
           </div>
-          <span className="rounded bg-[#00E5FF]/10 px-2 py-0.5 text-[10px] font-semibold text-[#00E5FF] border border-[#00E5FF]/25">
+          <span className="rounded-md bg-[#EBF3FC] px-2 py-0.5 text-[10px] font-bold text-[#014BAA] border border-[#BFD7F5]">
             KPI METRICS
           </span>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {data.map((item, idx) => (
-            <div key={idx} className="rounded-xl border border-[#262626] bg-[#111111] p-3.5 hover:border-[#00E5FF]/30 transition">
-              <p className="text-xs text-[#a3a3a3] font-medium truncate">{item.name}</p>
-              <p className="text-xl font-black text-white mt-1 tracking-tight">{item.value}</p>
+            <div key={idx} className="rounded-xl border border-[#DCE5EE] bg-[#F8F3F0] p-3.5 hover:border-[#014BAA]/40 transition">
+              <p className="text-xs text-[#64748B] font-medium truncate">{item.name}</p>
+              <p className="text-xl font-bold text-[#0B192C] mt-1 tracking-tight font-heading">{item.value}</p>
             </div>
           ))}
         </div>
@@ -71,20 +71,20 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-[#262626] bg-[#161616] p-5 shadow-sm">
+    <div className="rounded-2xl border border-[#DCE5EE] bg-white p-5 royal-shadow-sm">
       <div className="mb-5 flex items-start justify-between">
         <div>
           <div className="flex items-center space-x-2">
-            {config.chartType === 'bar' && <BarChart3 className="h-4 w-4 text-[#00E5FF]" />}
-            {config.chartType === 'line' && <LineIcon className="h-4 w-4 text-[#00E5FF]" />}
-            {config.chartType === 'area' && <TrendingUp className="h-4 w-4 text-[#00E5FF]" />}
-            {(config.chartType === 'pie' || config.chartType === 'donut') && <PieIcon className="h-4 w-4 text-[#00E5FF]" />}
-            <h4 className="text-sm font-bold text-white">{config.title}</h4>
+            {config.chartType === 'bar' && <BarChart3 className="h-4 w-4 text-[#014BAA]" />}
+            {config.chartType === 'line' && <LineIcon className="h-4 w-4 text-[#014BAA]" />}
+            {config.chartType === 'area' && <TrendingUp className="h-4 w-4 text-[#014BAA]" />}
+            {(config.chartType === 'pie' || config.chartType === 'donut') && <PieIcon className="h-4 w-4 text-[#014BAA]" />}
+            <h4 className="text-sm font-bold text-[#0B192C] font-heading">{config.title}</h4>
           </div>
-          {config.description && <p className="text-xs text-[#a3a3a3] mt-1">{config.description}</p>}
+          {config.description && <p className="text-xs text-[#64748B] mt-1">{config.description}</p>}
         </div>
 
-        <span className="rounded bg-[#1f1f1f] px-2 py-0.5 text-[10px] font-mono text-[#a3a3a3] uppercase border border-[#262626]">
+        <span className="rounded-md bg-[#F8F3F0] px-2 py-0.5 text-[10px] font-mono font-semibold text-[#64748B] uppercase border border-[#DCE5EE]">
           {config.chartType}
         </span>
       </div>
@@ -93,72 +93,72 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
         <ResponsiveContainer width="100%" height="100%">
           {config.chartType === 'bar' ? (
             <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
-              <XAxis dataKey={xKey} stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
-              <YAxis stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E6DFD8" vertical={false} />
+              <XAxis dataKey={xKey} stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
+              <YAxis stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161616',
-                  borderColor: '#00E5FF40',
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#BFD7F5',
                   borderRadius: '0.75rem',
-                  color: '#ededed',
+                  color: '#0B192C',
                   fontSize: '12px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  boxShadow: '0 10px 25px -5px rgba(1, 75, 170, 0.1)',
                 }}
               />
-              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#a3a3a3' }} />
-              <Bar dataKey={yKey} fill="#00E5FF" radius={[6, 6, 0, 0]} />
+              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#64748B' }} />
+              <Bar dataKey={yKey} fill="#014BAA" radius={[6, 6, 0, 0]} />
             </BarChart>
           ) : config.chartType === 'line' ? (
             <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
-              <XAxis dataKey={xKey} stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
-              <YAxis stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E6DFD8" vertical={false} />
+              <XAxis dataKey={xKey} stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
+              <YAxis stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161616',
-                  borderColor: '#00E5FF40',
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#BFD7F5',
                   borderRadius: '0.75rem',
-                  color: '#ededed',
+                  color: '#0B192C',
                   fontSize: '12px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  boxShadow: '0 10px 25px -5px rgba(1, 75, 170, 0.1)',
                 }}
               />
-              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#a3a3a3' }} />
+              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#64748B' }} />
               <Line
                 type="monotone"
                 dataKey={yKey}
-                stroke="#00E5FF"
+                stroke="#014BAA"
                 strokeWidth={2.5}
-                dot={{ r: 4, fill: '#00E5FF', stroke: '#111111', strokeWidth: 2 }}
-                activeDot={{ r: 6, fill: '#33EBFF', stroke: '#00E5FF' }}
+                dot={{ r: 4, fill: '#014BAA', stroke: '#FFFFFF', strokeWidth: 2 }}
+                activeDot={{ r: 6, fill: '#0D6EFD', stroke: '#014BAA' }}
               />
             </LineChart>
           ) : config.chartType === 'area' ? (
             <AreaChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
               <defs>
                 <linearGradient id={`grad-${config.id}`} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00E5FF" stopOpacity={0.7} />
-                  <stop offset="95%" stopColor="#00E5FF" stopOpacity={0.02} />
+                  <stop offset="5%" stopColor="#014BAA" stopOpacity={0.6} />
+                  <stop offset="95%" stopColor="#014BAA" stopOpacity={0.03} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#262626" vertical={false} />
-              <XAxis dataKey={xKey} stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
-              <YAxis stroke="#737373" tick={{ fontSize: 11, fill: '#a3a3a3' }} axisLine={{ stroke: '#262626' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E6DFD8" vertical={false} />
+              <XAxis dataKey={xKey} stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
+              <YAxis stroke="#64748B" tick={{ fontSize: 11, fill: '#3B4D63' }} axisLine={{ stroke: '#DCE5EE' }} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161616',
-                  borderColor: '#00E5FF40',
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#BFD7F5',
                   borderRadius: '0.75rem',
-                  color: '#ededed',
+                  color: '#0B192C',
                   fontSize: '12px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  boxShadow: '0 10px 25px -5px rgba(1, 75, 170, 0.1)',
                 }}
               />
               <Area
                 type="monotone"
                 dataKey={yKey}
-                stroke="#00E5FF"
+                stroke="#014BAA"
                 fillOpacity={1}
                 fill={`url(#grad-${config.id})`}
                 strokeWidth={2.5}
@@ -168,15 +168,15 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
             <PieChart>
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161616',
-                  borderColor: '#00E5FF40',
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#BFD7F5',
                   borderRadius: '0.75rem',
-                  color: '#ededed',
+                  color: '#0B192C',
                   fontSize: '12px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                  boxShadow: '0 10px 25px -5px rgba(1, 75, 170, 0.1)',
                 }}
               />
-              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#a3a3a3' }} />
+              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#64748B' }} />
               <Pie
                 data={data}
                 dataKey={yKey}
@@ -186,7 +186,7 @@ export function DocumentChartRenderer({ config }: ChartRendererProps) {
                 innerRadius={config.chartType === 'donut' ? 50 : 0}
                 outerRadius={80}
                 paddingAngle={3}
-                stroke="#111111"
+                stroke="#FFFFFF"
                 strokeWidth={2}
               >
                 {data.map((_, index) => (

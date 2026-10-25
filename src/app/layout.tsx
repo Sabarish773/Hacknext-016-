@@ -1,7 +1,27 @@
 import type { Metadata } from 'next';
+import { Playfair_Display, Inter, Great_Vibes } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { HighlightProvider } from '@/context/HighlightContext';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+});
+
+const greatVibes = Great_Vibes({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-cursive',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Doc.DOOM — Enterprise Information Intelligence',
@@ -19,8 +39,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark h-full antialiased bg-[#111111] text-[#ededed]">
-      <body className="min-h-full flex flex-col bg-[#111111] text-[#ededed] font-sans selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${greatVibes.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-[#F8F3F0] text-[#0B192C] font-sans selection:bg-[#014BAA]/15 selection:text-[#014BAA]">
         <AuthProvider>
           <HighlightProvider>{children}</HighlightProvider>
         </AuthProvider>

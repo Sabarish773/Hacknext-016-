@@ -76,12 +76,12 @@ function DocumentLibraryContent() {
   const getFormatIcon = (mimeType: string, name: string) => {
     const ext = name.toLowerCase().split('.').pop() || '';
     if (['csv', 'xls', 'xlsx'].includes(ext)) {
-      return <FileSpreadsheet className="h-6 w-6 text-[#00E5FF]" />;
+      return <FileSpreadsheet className="h-6 w-6 text-[#014BAA]" />;
     }
     if (['png', 'jpg', 'jpeg'].includes(ext)) {
-      return <FileImage className="h-6 w-6 text-[#38BDF8]" />;
+      return <FileImage className="h-6 w-6 text-[#0D6EFD]" />;
     }
-    return <FileText className="h-6 w-6 text-[#00E5FF]" />;
+    return <FileText className="h-6 w-6 text-[#014BAA]" />;
   };
 
   const categories = Array.from(
@@ -95,7 +95,7 @@ function DocumentLibraryContent() {
   });
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col lg:flex-row selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
+    <div className="min-h-screen bg-[#F8F3F0] text-[#0B192C] flex flex-col lg:flex-row selection:bg-[#014BAA]/15 selection:text-[#014BAA]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -105,11 +105,11 @@ function DocumentLibraryContent() {
           {/* Top Bar with Search & Filters */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-black text-white tracking-tight flex items-center space-x-2.5">
-                <Files className="h-6 w-6 text-[#00E5FF]" />
+              <h1 className="text-2xl font-bold text-[#0B192C] tracking-tight flex items-center space-x-2.5 font-heading">
+                <Files className="h-6 w-6 text-[#014BAA]" />
                 <span>Enterprise Document Library</span>
               </h1>
-              <p className="text-xs text-[#737373] mt-1">
+              <p className="text-xs text-[#64748B] mt-1">
                 Persistent storage, multi-document intelligence, and cognitive analysis
               </p>
             </div>
@@ -119,7 +119,7 @@ function DocumentLibraryContent() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="rounded-xl border border-[#262626] bg-[#161616] px-3 py-2 text-xs font-medium text-[#ededed] focus:outline-none focus:border-[#00E5FF]"
+                className="rounded-xl border border-[#DCE5EE] bg-white px-3 py-2 text-xs font-semibold text-[#0B192C] focus:outline-none focus:border-[#014BAA] shadow-sm"
               >
                 <option value="ALL">All Categories ({documents.length})</option>
                 {categories.map((c) => (
@@ -133,7 +133,7 @@ function DocumentLibraryContent() {
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="rounded-xl border border-[#262626] bg-[#161616] px-3 py-2 text-xs font-medium text-[#ededed] focus:outline-none focus:border-[#00E5FF]"
+                className="rounded-xl border border-[#DCE5EE] bg-white px-3 py-2 text-xs font-semibold text-[#0B192C] focus:outline-none focus:border-[#014BAA] shadow-sm"
               >
                 <option value="ALL">All Statuses</option>
                 <option value="COMPLETED">Completed</option>
@@ -145,9 +145,9 @@ function DocumentLibraryContent() {
               {/* Upload CTA */}
               <button
                 onClick={() => setIsUploadOpen(true)}
-                className="flex items-center space-x-1.5 rounded-xl bg-[#00E5FF] hover:bg-[#33EBFF] active:bg-[#00B4CC] px-4 py-2 text-xs font-bold text-[#111111] shadow-lg shadow-[#00E5FF]/20 transition flex-shrink-0"
+                className="flex items-center space-x-1.5 rounded-xl bg-[#014BAA] hover:bg-[#013C88] active:bg-[#012E69] px-4 py-2 text-xs font-bold text-white shadow-md shadow-[#014BAA]/20 transition flex-shrink-0"
               >
-                <Upload className="h-3.5 w-3.5 text-[#111111]" />
+                <Upload className="h-3.5 w-3.5 text-white" />
                 <span>Upload</span>
               </button>
             </div>
@@ -155,36 +155,36 @@ function DocumentLibraryContent() {
 
           {/* Quick search bar inside library */}
           <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#737373]" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#64748B]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by title, extracted facts, entity names, or missing information..."
-              className="w-full rounded-2xl border border-[#262626] bg-[#161616] py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#ededed] placeholder-[#737373] focus:border-[#00E5FF] focus:outline-none focus:ring-1 focus:ring-[#00E5FF]"
+              className="w-full rounded-2xl border border-[#DCE5EE] bg-white py-2.5 pl-10 pr-4 text-xs sm:text-sm text-[#0B192C] placeholder-[#94A3B8] focus:border-[#014BAA] focus:outline-none focus:ring-1 focus:ring-[#014BAA] shadow-sm"
             />
           </div>
 
           {/* Documents Grid */}
           {isLoading ? (
-            <div className="py-24 text-center text-[#737373] space-y-2">
-              <Sparkles className="h-6 w-6 animate-spin mx-auto text-[#00E5FF]" />
+            <div className="py-24 text-center text-[#64748B] space-y-2">
+              <Sparkles className="h-6 w-6 animate-spin mx-auto text-[#014BAA]" />
               <p className="text-xs">Synchronizing document intelligence repository...</p>
             </div>
           ) : filteredDocs.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-[#262626] bg-[#161616]/40 p-12 text-center max-w-xl mx-auto space-y-3">
-              <div className="h-12 w-12 rounded-2xl bg-[#00E5FF]/10 text-[#00E5FF] flex items-center justify-center mx-auto border border-[#00E5FF]/25">
+            <div className="rounded-3xl border border-dashed border-[#DCE5EE] bg-white p-12 text-center max-w-xl mx-auto space-y-3 royal-shadow-sm">
+              <div className="h-12 w-12 rounded-2xl bg-[#EBF3FC] text-[#014BAA] flex items-center justify-center mx-auto border border-[#BFD7F5]">
                 <Files className="h-6 w-6" />
               </div>
-              <h3 className="text-base font-bold text-white">No documents matched your filter</h3>
-              <p className="text-xs text-[#a3a3a3] leading-relaxed">
+              <h3 className="text-base font-bold text-[#0B192C] font-heading">No documents matched your filter</h3>
+              <p className="text-xs text-[#3B4D63] leading-relaxed">
                 Upload your contracts, financial sheets, invoices, or policies to initiate Doc.DOOM cognitive intelligence.
               </p>
               <button
                 onClick={() => setIsUploadOpen(true)}
-                className="mt-3 inline-flex items-center space-x-2 rounded-xl bg-[#00E5FF] hover:bg-[#33EBFF] px-4 py-2 text-xs font-bold text-[#111111] transition"
+                className="mt-3 inline-flex items-center space-x-2 rounded-xl bg-[#014BAA] hover:bg-[#013C88] px-4 py-2 text-xs font-bold text-white transition shadow-sm"
               >
-                <Upload className="h-4 w-4 text-[#111111]" />
+                <Upload className="h-4 w-4 text-white" />
                 <span>Upload Documents</span>
               </button>
             </div>
@@ -193,20 +193,20 @@ function DocumentLibraryContent() {
               {filteredDocs.map((doc, idx) => (
                 <div
                   key={doc.id}
-                  className="rounded-2xl border border-[#262626] bg-[#161616] hover:border-[#00E5FF]/40 p-5 flex flex-col justify-between transition group shadow-sm hover:shadow-md"
+                  className="rounded-2xl border border-[#DCE5EE] bg-white hover:border-[#014BAA]/40 p-5 flex flex-col justify-between transition group royal-shadow-sm hover:shadow-md"
                 >
                   <div>
                     {/* Header */}
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className="p-2.5 rounded-xl bg-[#111111] border border-[#262626] flex-shrink-0">
+                        <div className="p-2.5 rounded-xl bg-[#F8F3F0] border border-[#DCE5EE] flex-shrink-0">
                           {getFormatIcon(doc.mimeType, doc.originalName)}
                         </div>
                         <div>
-                          <span className="text-[10px] font-mono text-[#00E5FF] font-bold tracking-wider">
+                          <span className="text-[10px] font-mono text-[#014BAA] font-bold tracking-wider">
                             DOCUMENT {doc.docNumber || idx + 1}
                           </span>
-                          <h3 className="text-sm font-bold text-white line-clamp-1 group-hover:text-[#00E5FF] transition">
+                          <h3 className="text-sm font-bold text-[#0B192C] line-clamp-1 group-hover:text-[#014BAA] transition font-heading">
                             {doc.title}
                           </h3>
                         </div>
@@ -215,7 +215,7 @@ function DocumentLibraryContent() {
                       <button
                         onClick={() => handleDelete(doc.id, doc.title)}
                         disabled={isDeleting === doc.id}
-                        className="text-[#737373] hover:text-red-400 p-1.5 rounded-lg hover:bg-red-950/20 transition"
+                        className="text-[#64748B] hover:text-red-600 p-1.5 rounded-lg hover:bg-red-50 transition"
                         title="Delete document and analysis"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -224,16 +224,16 @@ function DocumentLibraryContent() {
 
                     {/* Category & Status */}
                     <div className="mt-4 flex items-center space-x-2">
-                      <span className="rounded-md bg-[#1f1f1f] px-2 py-0.5 text-[10px] font-medium text-[#a3a3a3] border border-[#262626]">
+                      <span className="rounded-md bg-[#F8F3F0] px-2 py-0.5 text-[10px] font-semibold text-[#3B4D63] border border-[#DCE5EE]">
                         {doc.analysis?.category || 'General'}
                       </span>
                       <span
-                        className={`rounded-md px-2 py-0.5 text-[10px] font-medium border ${
+                        className={`rounded-md px-2 py-0.5 text-[10px] font-bold border ${
                           doc.status === 'COMPLETED'
-                            ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60'
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
                             : doc.status === 'FAILED'
-                            ? 'bg-red-950/60 text-red-400 border-red-800/60'
-                            : 'bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/30'
+                            ? 'bg-red-50 text-red-800 border-red-300'
+                            : 'bg-[#EBF3FC] text-[#014BAA] border-[#BFD7F5]'
                         }`}
                       >
                         {doc.status}
@@ -241,23 +241,23 @@ function DocumentLibraryContent() {
                     </div>
 
                     {/* Short Summary */}
-                    <p className="mt-3 text-xs text-[#a3a3a3] line-clamp-2 leading-relaxed">
+                    <p className="mt-3 text-xs text-[#3B4D63] line-clamp-2 leading-relaxed">
                       {doc.analysis?.shortSummary || 'Document text extracted. Cognitive analysis pending.'}
                     </p>
 
                     {/* Intelligence Badges */}
-                    <div className="mt-4 pt-3 border-t border-[#262626] flex flex-wrap gap-2 text-[11px]">
-                      <span className="text-[#a3a3a3]">
-                        <strong className="text-white">{doc.entities?.length || 0}</strong> entities
+                    <div className="mt-4 pt-3 border-t border-[#E6DFD8] flex flex-wrap gap-2 text-[11px]">
+                      <span className="text-[#3B4D63]">
+                        <strong className="text-[#0B192C]">{doc.entities?.length || 0}</strong> entities
                       </span>
-                      <span className="text-[#525252]">•</span>
-                      <span className="text-[#a3a3a3]">
-                        <strong className="text-white">{doc.insights?.length || 0}</strong> insights
+                      <span className="text-[#94A3B8]">•</span>
+                      <span className="text-[#3B4D63]">
+                        <strong className="text-[#0B192C]">{doc.insights?.length || 0}</strong> insights
                       </span>
                       {doc.missingInformation && doc.missingInformation.length > 0 && (
                         <>
-                          <span className="text-[#525252]">•</span>
-                          <span className="text-[#00E5FF] font-semibold">
+                          <span className="text-[#94A3B8]">•</span>
+                          <span className="text-purple-700 font-bold">
                             {doc.missingInformation.length} missing gaps
                           </span>
                         </>
@@ -266,14 +266,14 @@ function DocumentLibraryContent() {
                   </div>
 
                   {/* Actions */}
-                  <div className="mt-5 pt-3 border-t border-[#262626] flex items-center justify-between">
-                    <span className="text-[10px] font-mono text-[#737373]">
+                  <div className="mt-5 pt-3 border-t border-[#E6DFD8] flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-semibold text-[#64748B]">
                       {(doc.fileSizeBytes / 1024).toFixed(0)} KB • {doc.pageCount || 1} pg
                     </span>
 
                     <Link
                       href={`/documents/${doc.id}`}
-                      className="flex items-center space-x-1 text-xs font-bold text-[#00E5FF] hover:text-[#33EBFF] group-hover:translate-x-0.5 transition"
+                      className="flex items-center space-x-1 text-xs font-bold text-[#014BAA] hover:text-[#013C88] group-hover:translate-x-0.5 transition"
                     >
                       <span>Open Intelligence</span>
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -299,7 +299,7 @@ export default function DocumentLibraryPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#111111] flex items-center justify-center text-[#737373] text-xs">
+        <div className="min-h-screen bg-[#F8F3F0] flex items-center justify-center text-[#64748B] text-xs">
           Loading Document Library...
         </div>
       }

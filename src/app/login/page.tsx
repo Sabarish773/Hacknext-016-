@@ -12,44 +12,44 @@ export default function LoginPage() {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col justify-between p-6 selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
+    <div className="min-h-screen bg-[#F8F3F0] text-[#0B192C] flex flex-col justify-between p-6 selection:bg-[#014BAA]/15 selection:text-[#014BAA]">
       {/* Top Header */}
       <div className="max-w-6xl mx-auto w-full flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2.5 group">
           <Logo size="sm" priority />
-          <span className="text-lg font-black text-white group-hover:text-[#00E5FF] transition">
+          <span className="text-lg font-bold text-[#0B192C] group-hover:text-[#014BAA] transition font-heading">
             Doc.DOOM
           </span>
         </Link>
 
         <button
           onClick={() => setIsContactOpen(true)}
-          className="text-xs font-medium text-[#a3a3a3] hover:text-[#00E5FF] flex items-center space-x-1.5 transition"
+          className="text-xs font-semibold text-[#3B4D63] hover:text-[#014BAA] flex items-center space-x-1.5 transition"
         >
-          <Mail className="h-3.5 w-3.5 text-[#00E5FF]" />
+          <Mail className="h-3.5 w-3.5 text-[#014BAA]" />
           <span>Support: sanjay9187ram@gmail.com</span>
         </button>
       </div>
 
       {/* Main Login Card */}
-      <div className="max-w-md mx-auto w-full rounded-3xl border border-[#262626] bg-[#161616] p-8 shadow-2xl text-center relative overflow-hidden backdrop-blur-xl cyan-glow">
-        <div className="absolute top-0 inset-x-0 h-1 bg-[#00E5FF]" />
+      <div className="max-w-md mx-auto w-full rounded-3xl border border-[#DCE5EE] bg-white p-8 sm:p-10 royal-shadow-lg text-center relative overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-1.5 bg-[#014BAA]" />
 
-        <div className="mx-auto h-14 w-14 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/25 text-[#00E5FF] flex items-center justify-center mb-6 shadow-inner">
-          <ShieldCheck className="h-7 w-7 text-[#00E5FF]" />
+        <div className="mx-auto h-14 w-14 rounded-2xl bg-[#EBF3FC] border border-[#BFD7F5] text-[#014BAA] flex items-center justify-center mb-6 shadow-sm">
+          <ShieldCheck className="h-7 w-7 text-[#014BAA]" />
         </div>
 
-        <h1 className="text-2xl font-black text-white tracking-tight">Enterprise Access</h1>
-        <p className="mt-2 text-xs text-[#a3a3a3] leading-relaxed">
+        <h1 className="text-2xl font-bold text-[#0B192C] tracking-tight font-heading">Enterprise Access</h1>
+        <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
           Sign in to access your secure document repository, cross-document intelligence, and cognitive analysis.
         </p>
 
         {/* Primary Direct Google Sign-In Button */}
-        <div className="mt-8 space-y-3">
+        <div className="mt-8 space-y-3.5">
           <button
             onClick={loginWithGoogle}
             disabled={isLoading}
-            className="w-full flex items-center justify-center space-x-3 rounded-2xl bg-white hover:bg-[#ededed] px-5 py-3.5 text-sm font-bold text-[#111111] shadow-xl transition disabled:opacity-50"
+            className="w-full flex items-center justify-center space-x-3 rounded-2xl bg-white hover:bg-[#F8F3F0] border border-[#DCE5EE] px-5 py-3.5 text-sm font-bold text-[#0B192C] shadow-sm transition disabled:opacity-50"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
@@ -75,28 +75,28 @@ export default function LoginPage() {
           {/* Quick Jury / Demo Evaluation Button */}
           <button
             onClick={() => loginAsDemo('HackNext Judge')}
-            className="w-full flex items-center justify-center space-x-2 rounded-2xl border border-[#262626] bg-[#111111] hover:bg-[#1a1a1a] hover:border-[#00E5FF]/40 px-5 py-3 text-xs font-semibold text-[#ededed] transition"
+            className="w-full flex items-center justify-center space-x-2 rounded-2xl bg-[#014BAA] hover:bg-[#013C88] active:bg-[#012E69] px-5 py-3 text-xs font-bold text-white shadow-md shadow-[#014BAA]/20 transition"
           >
-            <Sparkles className="h-4 w-4 text-[#00E5FF]" />
+            <Sparkles className="h-4 w-4 text-white" />
             <span>Instant Demo Access (HackNext Jury Review)</span>
           </button>
         </div>
 
         {/* Security badges */}
-        <div className="mt-8 pt-6 border-t border-[#262626] flex items-center justify-center space-x-4 text-[11px] text-[#737373]">
-          <span className="flex items-center space-x-1">
-            <CheckCircle2 className="h-3.5 w-3.5 text-[#00E5FF]" />
-            <span className="text-[#a3a3a3]">User Isolation (RLS)</span>
+        <div className="mt-8 pt-6 border-t border-[#E6DFD8] flex items-center justify-center space-x-4 text-[11px] text-[#64748B]">
+          <span className="flex items-center space-x-1 font-medium">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#014BAA]" />
+            <span>User Isolation (RLS)</span>
           </span>
-          <span className="flex items-center space-x-1">
-            <CheckCircle2 className="h-3.5 w-3.5 text-[#00E5FF]" />
-            <span className="text-[#a3a3a3]">Private Storage</span>
+          <span className="flex items-center space-x-1 font-medium">
+            <CheckCircle2 className="h-3.5 w-3.5 text-[#014BAA]" />
+            <span>Private Storage</span>
           </span>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="max-w-6xl mx-auto w-full text-center text-xs text-[#737373]">
+      <div className="max-w-6xl mx-auto w-full text-center text-xs text-[#64748B]">
         Doc.DOOM Enterprise • HackNext’26 • Direct Google Sign-In Flow
       </div>
 

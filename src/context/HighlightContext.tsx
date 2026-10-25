@@ -14,13 +14,13 @@ interface HighlightContextType {
 }
 
 const DEFAULT_COLORS: HighlightColorSettings = {
-  critical: '#ef4444',     // Red
-  important: '#f97316',    // Orange
-  warning: '#eab308',      // Amber
-  missing: '#a855f7',      // Purple
-  conflict: '#ec4899',     // Pink
-  deadline: '#3b82f6',     // Blue
-  informational: '#10b981',// Green
+  critical: '#b91c1c',     // Red
+  important: '#c2410c',    // Orange
+  warning: '#b45309',      // Amber
+  missing: '#7e22ce',      // Purple
+  conflict: '#be185d',     // Rose / Pink
+  deadline: '#014baa',     // Royal Blue
+  informational: '#047857',// Emerald Green
 };
 
 const LOCAL_STORAGE_HIGHLIGHTS_KEY = 'docdoom_highlight_settings';

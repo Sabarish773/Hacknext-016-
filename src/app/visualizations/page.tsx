@@ -54,7 +54,7 @@ export default function VisualizationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col lg:flex-row selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
+    <div className="min-h-screen bg-[#F8F3F0] text-[#0B192C] flex flex-col lg:flex-row selection:bg-[#014BAA]/15 selection:text-[#014BAA]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -64,20 +64,20 @@ export default function VisualizationsPage() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-black text-white tracking-tight flex items-center space-x-2.5">
-                <BarChart3 className="h-6 w-6 text-[#00E5FF]" />
-                <span>Document Analytics & Visualizations</span>
+              <h1 className="text-2xl font-bold text-[#0B192C] tracking-tight flex items-center space-x-2.5 font-heading">
+                <BarChart3 className="h-6 w-6 text-[#014BAA]" />
+                <span>Document Analytics &amp; Visualizations</span>
               </h1>
-              <p className="text-xs text-[#737373] mt-1">
+              <p className="text-xs text-[#64748B] mt-1">
                 Data-driven charts generated strictly when quantitative series exist in the selected document.
               </p>
             </div>
           </div>
 
           {/* Prominent Document-Number Selector Bar */}
-          <div className="rounded-2xl border border-[#262626] bg-[#161616] p-5 space-y-3">
+          <div className="rounded-2xl border border-[#DCE5EE] bg-white p-5 space-y-3 royal-shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#a3a3a3]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#3B4D63]">
                 Document-Number Selector (1 to {documents.length || 0})
               </span>
 
@@ -87,21 +87,21 @@ export default function VisualizationsPage() {
                   <button
                     onClick={handlePrevDoc}
                     disabled={selectedIndex <= 0}
-                    className="p-1.5 rounded-lg border border-[#262626] bg-[#111111] hover:bg-[#1f1f1f] disabled:opacity-30 transition"
+                    className="p-1.5 rounded-lg border border-[#DCE5EE] bg-[#F8F3F0] hover:bg-[#ECE5DF] disabled:opacity-30 transition"
                     title="Previous Document"
                   >
-                    <ChevronLeft className="h-4 w-4 text-[#ededed]" />
+                    <ChevronLeft className="h-4 w-4 text-[#0B192C]" />
                   </button>
-                  <span className="text-xs font-mono font-bold text-[#00E5FF] px-2">
+                  <span className="text-xs font-mono font-bold text-[#014BAA] px-2 bg-[#EBF3FC] py-0.5 rounded border border-[#BFD7F5]">
                     {selectedIndex + 1} / {documents.length}
                   </span>
                   <button
                     onClick={handleNextDoc}
                     disabled={selectedIndex >= documents.length - 1}
-                    className="p-1.5 rounded-lg border border-[#262626] bg-[#111111] hover:bg-[#1f1f1f] disabled:opacity-30 transition"
+                    className="p-1.5 rounded-lg border border-[#DCE5EE] bg-[#F8F3F0] hover:bg-[#ECE5DF] disabled:opacity-30 transition"
                     title="Next Document"
                   >
-                    <ChevronRight className="h-4 w-4 text-[#ededed]" />
+                    <ChevronRight className="h-4 w-4 text-[#0B192C]" />
                   </button>
                 </div>
               )}
@@ -109,9 +109,9 @@ export default function VisualizationsPage() {
 
             {/* Document Number Bar Buttons */}
             {isLoading ? (
-              <p className="text-xs text-[#737373]">Loading document library...</p>
+              <p className="text-xs text-[#64748B]">Loading document library...</p>
             ) : documents.length === 0 ? (
-              <div className="p-6 rounded-xl border border-dashed border-[#262626] text-center text-xs text-[#737373]">
+              <div className="p-6 rounded-xl border border-dashed border-[#DCE5EE] text-center text-xs text-[#64748B]">
                 No documents found in your library. Please upload documents to view automated visualizations.
               </div>
             ) : (
@@ -124,11 +124,11 @@ export default function VisualizationsPage() {
                       onClick={() => setSelectedIndex(idx)}
                       className={`flex items-center space-x-2 rounded-xl px-3.5 py-2 text-xs font-semibold border transition ${
                         isSelected
-                          ? 'border-[#00E5FF] bg-[#00E5FF]/15 text-[#00E5FF] shadow-md shadow-[#00E5FF]/20 font-bold'
-                          : 'border-[#262626] bg-[#111111] text-[#a3a3a3] hover:border-[#00E5FF]/30 hover:text-white'
+                          ? 'border-[#014BAA] bg-[#EBF3FC] text-[#014BAA] shadow-sm font-bold'
+                          : 'border-[#DCE5EE] bg-[#F8F3F0] text-[#3B4D63] hover:border-[#014BAA]/30 hover:text-[#014BAA]'
                       }`}
                     >
-                      <span className="font-mono text-xs font-bold text-[#00E5FF]">
+                      <span className="font-mono text-xs font-bold text-[#014BAA]">
                         Document {idx + 1}
                       </span>
                       <span className="truncate max-w-[140px] font-normal">{doc.title}</span>
@@ -143,19 +143,19 @@ export default function VisualizationsPage() {
           {selectedDoc && (
             <div className="space-y-6">
               {/* Selected Document Info Bar */}
-              <div className="rounded-2xl border border-[#262626] bg-[#161616] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+              <div className="rounded-2xl border border-[#DCE5EE] bg-white p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 royal-shadow-sm">
                 <div className="flex items-center space-x-3">
-                  <div className="h-10 w-10 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/25 flex items-center justify-center text-[#00E5FF] font-bold text-sm">
+                  <div className="h-10 w-10 rounded-xl bg-[#EBF3FC] border border-[#BFD7F5] flex items-center justify-center text-[#014BAA] font-bold text-sm">
                     #{selectedIndex + 1}
                   </div>
                   <div>
-                    <h2 className="text-sm sm:text-base font-bold text-white flex items-center space-x-2">
+                    <h2 className="text-sm sm:text-base font-bold text-[#0B192C] flex items-center space-x-2 font-heading">
                       <span>{selectedDoc.title}</span>
-                      <span className="rounded bg-[#1f1f1f] px-2 py-0.5 text-[10px] font-medium text-[#a3a3a3] border border-[#262626]">
+                      <span className="rounded bg-[#F8F3F0] px-2 py-0.5 text-[10px] font-semibold text-[#3B4D63] border border-[#DCE5EE]">
                         {selectedDoc.analysis?.category || 'General'}
                       </span>
                     </h2>
-                    <p className="text-xs text-[#737373] mt-0.5">
+                    <p className="text-xs text-[#64748B] mt-0.5">
                       Visualizing quantitative metrics extracted exclusively from Document {selectedIndex + 1}
                     </p>
                   </div>
@@ -163,7 +163,7 @@ export default function VisualizationsPage() {
 
                 <Link
                   href={`/documents/${selectedDoc.id}`}
-                  className="text-xs font-semibold text-[#00E5FF] hover:text-[#33EBFF] flex items-center space-x-1"
+                  className="text-xs font-bold text-[#014BAA] hover:text-[#013C88] flex items-center space-x-1"
                 >
                   <span>Open Intelligence Details</span>
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -184,23 +184,23 @@ export default function VisualizationsPage() {
                 </div>
               ) : (
                 /* Non-numerical document empty state */
-                <div className="rounded-3xl border border-[#262626] bg-[#161616]/70 p-12 text-center max-w-2xl mx-auto space-y-4">
-                  <div className="h-14 w-14 rounded-2xl bg-[#00E5FF]/10 border border-[#00E5FF]/25 text-[#00E5FF] flex items-center justify-center mx-auto">
-                    <Info className="h-7 w-7 text-[#00E5FF]" />
+                <div className="rounded-3xl border border-[#DCE5EE] bg-white p-12 text-center max-w-2xl mx-auto space-y-4 royal-shadow-sm">
+                  <div className="h-14 w-14 rounded-2xl bg-[#EBF3FC] border border-[#BFD7F5] text-[#014BAA] flex items-center justify-center mx-auto">
+                    <Info className="h-7 w-7 text-[#014BAA]" />
                   </div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-[#0B192C] font-heading">
                     No meaningful visualization available for this document.
                   </h3>
-                  <p className="text-xs text-[#a3a3a3] leading-relaxed max-w-lg mx-auto">
+                  <p className="text-xs text-[#3B4D63] leading-relaxed max-w-lg mx-auto">
                     Document {selectedIndex + 1} (“{selectedDoc.title}”) contains qualitative text, narrative clauses, or policy guidelines without structured numerical datasets. Doc.DOOM does not fabricate irrelevant or misleading charts.
                   </p>
                   <div className="pt-2">
                     <Link
                       href={`/documents/${selectedDoc.id}`}
-                      className="inline-flex items-center space-x-1.5 rounded-xl border border-[#262626] bg-[#111111] hover:bg-[#1a1a1a] hover:border-[#00E5FF]/40 px-4 py-2 text-xs font-semibold text-[#ededed] transition"
+                      className="inline-flex items-center space-x-1.5 rounded-xl border border-[#DCE5EE] bg-[#F8F3F0] hover:bg-[#ECE5DF] px-4 py-2 text-xs font-semibold text-[#0B192C] transition"
                     >
-                      <FileText className="h-3.5 w-3.5 text-[#00E5FF]" />
-                      <span>Review Qualitative Findings & Facts</span>
+                      <FileText className="h-3.5 w-3.5 text-[#014BAA]" />
+                      <span>Review Qualitative Findings &amp; Facts</span>
                     </Link>
                   </div>
                 </div>

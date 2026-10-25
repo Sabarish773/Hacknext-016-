@@ -126,7 +126,7 @@ function ChatContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#ededed] flex flex-col lg:flex-row selection:bg-[#00E5FF]/20 selection:text-[#00E5FF]">
+    <div className="min-h-screen bg-[#F8F3F0] text-[#0B192C] flex flex-col lg:flex-row selection:bg-[#014BAA]/15 selection:text-[#014BAA]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
@@ -134,23 +134,23 @@ function ChatContent() {
 
         <main className="flex-1 flex flex-col max-w-5xl mx-auto w-full p-4 sm:p-6 overflow-hidden">
           {/* Top Controls: Mode & Document Selector */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#262626] gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E6DFD8] gap-3">
             <div className="flex items-center space-x-2.5">
-              <div className="h-9 w-9 rounded-xl bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 flex items-center justify-center">
+              <div className="h-9 w-9 rounded-xl bg-[#EBF3FC] text-[#014BAA] border border-[#BFD7F5] flex items-center justify-center">
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <h1 className="text-base font-bold text-white">Grounded AI Assistant</h1>
-                <p className="text-xs text-[#737373]">Zero hallucination • Source citations linked</p>
+                <h1 className="text-base font-bold text-[#0B192C] font-heading">Grounded AI Assistant</h1>
+                <p className="text-xs text-[#64748B]">Zero hallucination • Source citations linked</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-semibold text-[#a3a3a3]">Context Scope:</span>
+              <span className="text-xs font-semibold text-[#3B4D63]">Context Scope:</span>
               <select
                 value={selectedTargetDocId}
                 onChange={(e) => setSelectedTargetDocId(e.target.value)}
-                className="rounded-xl border border-[#262626] bg-[#161616] px-3 py-1.5 text-xs font-medium text-[#ededed] focus:outline-none focus:border-[#00E5FF]"
+                className="rounded-xl border border-[#DCE5EE] bg-white px-3 py-1.5 text-xs font-semibold text-[#0B192C] focus:outline-none focus:border-[#014BAA] shadow-sm"
               >
                 <option value="ALL">All Repository Documents ({documents.length})</option>
                 {documents.map((d, idx) => (
@@ -164,14 +164,14 @@ function ChatContent() {
 
           {/* Quick Prompt Chips */}
           <div className="py-3 flex items-center space-x-2 overflow-x-auto scrollbar-none text-xs">
-            <span className="text-[11px] font-semibold text-[#737373] uppercase flex-shrink-0">
+            <span className="text-[11px] font-bold text-[#64748B] uppercase flex-shrink-0 tracking-wider">
               Suggestions:
             </span>
             {QUICK_PROMPTS.map((p, i) => (
               <button
                 key={i}
                 onClick={() => handleSendMessage(p)}
-                className="rounded-lg border border-[#262626] bg-[#161616] hover:bg-[#1f1f1f] hover:border-[#00E5FF]/40 px-3 py-1 text-[#a3a3a3] hover:text-[#00E5FF] transition flex-shrink-0 whitespace-nowrap"
+                className="rounded-xl border border-[#DCE5EE] bg-white hover:bg-[#EBF3FC] hover:border-[#BFD7F5] px-3 py-1.5 text-[#3B4D63] hover:text-[#014BAA] font-medium transition flex-shrink-0 whitespace-nowrap shadow-sm"
               >
                 {p}
               </button>
@@ -188,7 +188,7 @@ function ChatContent() {
                 }`}
               >
                 {msg.role === 'assistant' && (
-                  <div className="h-8 w-8 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="h-8 w-8 rounded-xl bg-[#EBF3FC] border border-[#BFD7F5] text-[#014BAA] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Bot className="h-4 w-4" />
                   </div>
                 )}
@@ -196,31 +196,31 @@ function ChatContent() {
                 <div
                   className={`rounded-2xl p-4 text-xs sm:text-sm leading-relaxed max-w-2xl space-y-3 ${
                     msg.role === 'user'
-                      ? 'bg-[#00E5FF] text-[#111111] font-semibold rounded-tr-none shadow-md shadow-[#00E5FF]/20'
-                      : 'bg-[#161616] border border-[#262626] text-[#ededed] rounded-tl-none shadow-sm'
+                      ? 'bg-[#014BAA] text-white font-medium rounded-tr-none shadow-md shadow-[#014BAA]/20'
+                      : 'bg-white border border-[#DCE5EE] text-[#0B192C] rounded-tl-none royal-shadow-sm'
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.content}</p>
 
                   {/* Grounded Source Citations */}
                   {msg.sources && msg.sources.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-[#262626] space-y-2">
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#00E5FF] flex items-center space-x-1">
-                        <ShieldCheck className="h-3.5 w-3.5 text-[#00E5FF]" />
+                    <div className="mt-3 pt-3 border-t border-[#E6DFD8] space-y-2">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#014BAA] flex items-center space-x-1">
+                        <ShieldCheck className="h-3.5 w-3.5 text-[#014BAA]" />
                         <span>Source Traceability References</span>
                       </p>
                       <div className="space-y-1.5">
                         {msg.sources.map((src, sIdx) => (
                           <div
                             key={sIdx}
-                            className="rounded-lg border border-[#262626] bg-[#111111] p-2 text-xs font-mono"
+                            className="rounded-xl border border-[#DCE5EE] bg-[#F8F3F0] p-2.5 text-xs font-mono"
                           >
-                            <div className="flex items-center justify-between text-[#00E5FF] font-semibold">
+                            <div className="flex items-center justify-between text-[#014BAA] font-bold">
                               <span>{src.docTitle}</span>
-                              <span className="text-[10px] text-[#737373]">{src.sourceRef}</span>
+                              <span className="text-[10px] text-[#64748B] font-medium">{src.sourceRef}</span>
                             </div>
-                            <p className="text-[11px] text-[#a3a3a3] mt-1 italic font-sans">
-                              "{src.snippet}"
+                            <p className="text-[11px] text-[#3B4D63] mt-1 italic font-sans">
+                              &ldquo;{src.snippet}&rdquo;
                             </p>
                           </div>
                         ))}
@@ -230,16 +230,16 @@ function ChatContent() {
                 </div>
 
                 {msg.role === 'user' && (
-                  <div className="h-8 w-8 rounded-xl bg-[#1f1f1f] border border-[#262626] text-[#ededed] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <User className="h-4 w-4 text-[#00E5FF]" />
+                  <div className="h-8 w-8 rounded-xl bg-white border border-[#DCE5EE] text-[#014BAA] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                    <User className="h-4 w-4 text-[#014BAA]" />
                   </div>
                 )}
               </div>
             ))}
 
             {isSending && (
-              <div className="flex items-center space-x-2 text-xs text-[#737373] pl-11">
-                <Sparkles className="h-4 w-4 animate-spin text-[#00E5FF]" />
+              <div className="flex items-center space-x-2 text-xs text-[#64748B] pl-11">
+                <Sparkles className="h-4 w-4 animate-spin text-[#014BAA]" />
                 <span>Grounded reasoning over document repository...</span>
               </div>
             )}
@@ -247,7 +247,7 @@ function ChatContent() {
           </div>
 
           {/* Input Bar */}
-          <div className="pt-3 border-t border-[#262626]">
+          <div className="pt-3 border-t border-[#E6DFD8]">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -260,14 +260,14 @@ function ChatContent() {
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
                 placeholder="Ask about deadlines, obligations, missing fields, or amounts..."
-                className="w-full rounded-2xl border border-[#262626] bg-[#161616] py-3.5 pl-4 pr-12 text-xs sm:text-sm text-[#ededed] placeholder-[#737373] focus:border-[#00E5FF] focus:outline-none focus:ring-1 focus:ring-[#00E5FF]"
+                className="w-full rounded-2xl border border-[#DCE5EE] bg-white py-3.5 pl-4 pr-12 text-xs sm:text-sm text-[#0B192C] placeholder-[#94A3B8] focus:border-[#014BAA] focus:outline-none focus:ring-1 focus:ring-[#014BAA] shadow-sm transition"
               />
               <button
                 type="submit"
                 disabled={!inputQuery.trim() || isSending}
-                className="absolute right-2 p-2 rounded-xl bg-[#00E5FF] hover:bg-[#33EBFF] active:bg-[#00B4CC] text-[#111111] font-bold disabled:opacity-40 transition shadow-md shadow-[#00E5FF]/20"
+                className="absolute right-2 p-2 rounded-xl bg-[#014BAA] hover:bg-[#013C88] active:bg-[#012E69] text-white font-bold disabled:opacity-40 transition shadow-md shadow-[#014BAA]/20"
               >
-                <Send className="h-4 w-4 text-[#111111]" />
+                <Send className="h-4 w-4 text-white" />
               </button>
             </form>
           </div>
@@ -281,7 +281,7 @@ export default function AIChatPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#111111] flex items-center justify-center text-[#737373] text-xs">
+        <div className="min-h-screen bg-[#F8F3F0] flex items-center justify-center text-[#64748B] text-xs">
           Loading Grounded AI Assistant...
         </div>
       }
